@@ -1,17 +1,37 @@
-﻿<div ng-controller="founderController">
-	<h1>{{founder.FullName}}</h1>
+﻿<div id="founder-view" ng-controller="founderController">
 
+	<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{founder.FullName.replace(' ', '-')}}_thumb.jpg"/>
+	<h1>
+		{{founder.FullName}}
+	</h1>
+	<h4>
+		{{founder.DateBorn | date : 'MMM yyyy'}} - {{founder.DateDied | date : 'MMM yyyy'}}
+	</h4>
 
+	<div ng-repeat="role in founder.Roles" class="label label-default">
+		{{ role.Name }}
+	</div>
+	<div class="clearfix"></div>
 	<hr />
 
 	<div>
-		<h2>Founder Quotes</h2>
+		<h2>Quotations</h2>
 
 		<div ng-repeat="quote in quotes">
-			<p>{{ quote.QuoteText }}</p>
 
-			<div ng-repeat="word in quote.Keywords" class="label label-info">
-				{{ word }}
+			<div class="quote"><div class="fa fa-quote-left"></div>{{ quote.QuoteText }}<div class="fa fa-quote-right"></div></div>
+
+			<div class="quote-tags">
+				<div ng-repeat="word in quote.Keywords" class="label label-info">
+					{{ word | lowercase }}
+				</div>
+			</div>
+
+			<div class="quote-references">
+				source:
+				<span ng-repeat="ref in quote.References">
+					{{ref.ReferenceInformation}}
+				</span>
 			</div>
 			<hr />
 		</div>

@@ -1,4 +1,7 @@
-﻿body {
+﻿@colorDoubleQuote: #999;
+@colorLableBackgroundHover: #ff9d58;
+
+body {
 }
 
 
@@ -6,7 +9,60 @@
 	width: 1200px;
 }
 
+#founder-view{
+	h2 {
+		margin-bottom: 25px;
+	}
+}
+
 
 div.label {
 	margin-right: 4px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: @colorLableBackgroundHover;
+	}
 }
+
+
+
+
+.quote {
+	font-style: italic;
+	margin-bottom: 12px;
+
+	.fa-quote-left {
+		font-style: italic;
+		position: relative;
+		display: inline-block;
+		margin-right: 5px;
+		top: -6px;
+		color: @colorDoubleQuote;
+	}
+
+	.fa-quote-right {
+		font-style: italic;
+		position: relative;
+		display: inline-block;
+		margin-left: 5px;
+		top: -4px;
+		color: @colorDoubleQuote;
+	}
+}
+
+.quote-tags {
+	margin-bottom: 8px;
+}
+
+.quote-references {
+	font-size: smaller;
+}
+
+
+img.founder-thumbnail {
+	border-radius: 40%;
+	float: left;
+	margin-right: 15px;
+}
+
