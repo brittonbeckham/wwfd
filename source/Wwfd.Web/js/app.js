@@ -2,12 +2,13 @@
 
 app.config([
 	'$routeProvider', function ($routeProvider) {
-		$routeProvider.when('/founder/:founderId',
-			{ templateUrl: 'views/founder.html' });
+		$routeProvider
+			.when('/founder/:founderId', { templateUrl: 'views/founder.html' })
+			.when('/search/:searchString', { templateUrl: 'views/results.html' });
 	}
 ]);
 
-app.controller('appController', ['dataService', '$scope', function (wwfdData, $scope) {
+app.controller('appController', ['dataService', '$scope', '$location', function (wwfdData, $scope, $location) {
 
 	init();
 
@@ -26,9 +27,26 @@ app.controller('appController', ['dataService', '$scope', function (wwfdData, $s
 	$scope.searchFounders = function () {
 		wwfdData.searchFounders($scope.founderSearchText, loadFounders);
 	}
-	
+
+	$scope.searchAutoComplete = function () {
+
+	}
+
+	$scope.performSearch = function ($event) {
+
+		if ($event.keyCode == 13) {
+			var search = encodeURIComponent($scope.quoteSearchText);
+			$location.path('/search/' + search);
+
+		}
+	}
+
 	function loadFounders(data) {
 		$scope.founders = data;
+	}
+
+	function loadQuotes(data) {
+
 	}
 
 	return {};
@@ -58,6 +76,27 @@ app.controller('founderController', ['dataService', '$scope', '$routeParams', fu
 	return {};
 }]);
 
+app.controller('resultsController', ['dataService', '$scope', '$routeParams', function (wwfdData, $scope, $routeParams) {
+
+	init();
+
+	function init() {
+		if ($routeParams.searchString != null) {
+			wwfdData.searchQuotesByText($routeParams.searchString, loadQuotes);
+		}
+	}
+
+	function loadQuotes(data) {
+		$scope.quotes = data;
+
+		for (var i = 0; i < $scope.quotes.length; i++)
+			$scope.quotes[i].Keywords = $scope.quotes[i].Keywords.split(', ');
+	}
+
+	return {};
+}]);
+
+
 
 app.service('dataService', ['$http', function ($http) {
 
@@ -85,6 +124,9 @@ app.service('dataService', ['$http', function ($http) {
 		},
 		getFounderQuotesById: function (id, callback) {
 			get('quote/founder/' + id, callback);
+		},
+		searchQuotesByText: function (text, callback) {
+			get('quote/search/text/' + text, callback);
 		}
 	}
 

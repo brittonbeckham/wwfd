@@ -1,0 +1,22 @@
+﻿<div ng-controller="resultsController">
+	<h2>Search Results</h2>
+
+	<div ng-repeat="quote in quotes">
+
+		<div class="quote"><div class="fa fa-quote-left"></div>{{ quote.QuoteText }}<div class="fa fa-quote-right"></div></div>
+
+		<div class="quote-tags">
+			<div ng-repeat="word in quote.Keywords" class="label label-info">
+				{{ word | lowercase }}
+			</div>
+		</div>
+
+		<div class="quote-references">
+			source:
+			<span ng-repeat="ref in quote.References">
+				{{ref.ReferenceInformation}}
+			</span>
+		</div>
+		<hr />
+	</div>
+</div>

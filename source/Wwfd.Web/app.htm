@@ -18,7 +18,7 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<input type="text" class="form-control" placeholder="Search 1000s of quotes" />
+					<input type="text" class="form-control" placeholder="Search 1000s of quotes" ng-model="quoteSearchText" ng-keydown="performSearch($event)" ng-change="searchAutoComplete()" />
 				</div>
 			</div>
 		</header>
