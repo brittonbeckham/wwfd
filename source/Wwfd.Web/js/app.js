@@ -1,4 +1,4 @@
-﻿var app = angular.module('wwfdApp', ['ngRoute']);
+﻿var app = angular.module('wwfdApp', ['ngRoute', 'ngSanitize']);
 
 app.config([
 	'$routeProvider', function ($routeProvider) {
@@ -76,22 +76,33 @@ app.controller('founderController', ['dataService', '$scope', '$routeParams', fu
 	return {};
 }]);
 
-app.controller('resultsController', ['dataService', '$scope', '$routeParams', function (wwfdData, $scope, $routeParams) {
+app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$compile', '$sce', function (wwfdData, $scope, $routeParams, $compile, $sce) {
 
 	init();
 
 	function init() {
 		if ($routeParams.searchString != null) {
 			wwfdData.searchQuotesByText($routeParams.searchString, loadQuotes);
+			$scope.searchString = $routeParams.searchString;
 		}
 	}
 
 	function loadQuotes(data) {
 		$scope.quotes = data;
 
-		for (var i = 0; i < $scope.quotes.length; i++)
+		for (var i = 0; i < $scope.quotes.length; i++) {
+
+			var searchMask = $scope.searchString;
+			var regEx = new RegExp(searchMask, "ig");
+			var replaceMask = "<span class='highlight'>" + $scope.searchString + "</span>";
+
+			//searchMatch = $sce.trustAsHtml(searchMatch);
+
+			$scope.quotes[i].QuoteText = $scope.quotes[i].QuoteText.replace(regEx, $sce.trustAsHtml(replaceMask));
 			$scope.quotes[i].Keywords = $scope.quotes[i].Keywords.split(', ');
+		}
 	}
+
 
 	return {};
 }]);

@@ -4,6 +4,21 @@
 #founder-view h2 {
   margin-bottom: 25px;
 }
+#founder-view img.founder-thumbnail {
+  border-radius: 40%;
+  float: left;
+  margin-right: 15px;
+}
+#founder-view div.quote:last-child > hr {
+  display: none;
+}
+#results-view img.founder-thumbnail {
+  width: 55px;
+  border-radius: 50%;
+}
+#results-view div.quote:last-child > hr {
+  display: none;
+}
 div.label {
   margin-right: 4px;
   cursor: pointer;
@@ -31,14 +46,12 @@ div.label:hover {
   top: -4px;
   color: #999999;
 }
+.quote .highlight {
+  background-color: yellow;
+}
 .quote-tags {
-  margin-bottom: 8px;
+  margin: 8px 0;
 }
 .quote-references {
   font-size: smaller;
-}
-img.founder-thumbnail {
-  border-radius: 40%;
-  float: left;
-  margin-right: 15px;
 }
