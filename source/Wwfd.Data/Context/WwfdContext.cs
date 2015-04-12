@@ -25,15 +25,18 @@ namespace Wwfd.Data.Context
 
 		//dbo
 		public DbSet<Founder> Founders { get; set; }
-		public DbSet<Quote> Quotes { get; set; }
-		public DbSet<ContributorRoleType> ContributorRoleTypes { get; set; }
 		public DbSet<FounderRoleType> FounderRoleTypes { get; set; }
-		public DbSet<Contributor> Contributors { get; set; }
+		public DbSet<Quote> Quotes { get; set; }
 		public DbSet<QuoteHistory> QuoteHistories { get; set; }
 		public DbSet<QuoteHistoryType> QuoteHistoryTypes { get; set; }
 		public DbSet<QuoteReference> QuoteReferences { get; set; }
 		public DbSet<QuoteReferenceStatusType> QuoteReferenceStatusTypes { get; set; }
 		public DbSet<QuoteStatusType> QuoteStatus { get; set; }
+		public DbSet<ContributorRoleType> ContributorRoleTypes { get; set; }
+		public DbSet<Contributor> Contributors { get; set; }
+		public DbSet<Document> Documents { get; set; }
+		public DbSet<DocumentType> DocumentTypes { get; set; }
+		public DbSet<DocumentReference> DocumentReferences { get; set; }
 		public DbSet<PerformedSearch> PerformedSerarches { get; set; }
 
 		//DailyQuote
@@ -53,6 +56,7 @@ namespace Wwfd.Data.Context
 
 			//seed the lookup tables
 			context.CreateLookupForEnum<Enums.FounderRoleType>();
+			context.CreateLookupForEnum<Enums.DocumentType>();
 			context.CreateLookupForEnum<Enums.ContributorRoleType>();
 			context.CreateLookupForEnum<Enums.QuoteHistoryType>();
 			context.CreateLookupForEnum<Enums.QuoteStatusType>();
@@ -65,17 +69,15 @@ namespace Wwfd.Data.Context
 			//populate db with data if requested
 			if (populateSeedData)
 				PopulateSeedData(context);
-
-			
 		}
 
 		private static void SetupExtendedOptions(WwfdContext context)
 		{
 			//full text searching
-			context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, GetResourceSqlScript("Wwfd.Data.CodeFirst.Scripts.SetupFullText.sql"));
+			context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, GetResourceSqlScript("Wwfd.Data.Scripts.SetupFullText.sql"));
 
 			//triggers
-			context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, GetResourceSqlScript("Wwfd.Data.CodeFirst.Scripts.SetupTriggers.sql"));
+			context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, GetResourceSqlScript("Wwfd.Data.Scripts.SetupTriggers.sql"));
 
 			//disable lazyloading (should be default)
 			context.Configuration.LazyLoadingEnabled = false;
@@ -83,11 +85,13 @@ namespace Wwfd.Data.Context
 
 		private static void PopulateSeedData(WwfdContext context)
 		{
-			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.CodeFirst.Scripts.SeedContributors.sql"));
-			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.CodeFirst.Scripts.SeedFounders.sql"));
-			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.CodeFirst.Scripts.SeedQuotes.sql"));
-			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.CodeFirst.Scripts.SeedQuoteHistories.sql"));
-			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.CodeFirst.Scripts.SeedQuoteReferences.sql"));
+			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.Scripts.SeedContributors.sql"));
+			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.Scripts.SeedFounder.sql"));
+			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.Scripts.SeedFounderRoles.sql"));
+			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.Scripts.SeedQuotes.sql"));
+			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.Scripts.SeedQuoteHistories.sql"));
+			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.Scripts.SeedQuoteReferences.sql"));
+			context.Database.ExecuteSqlCommand(GetResourceSqlScript("Wwfd.Data.Scripts.SeedDocuments.sql"));
 		}
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -138,6 +142,15 @@ namespace Wwfd.Data.Context
 					x.ToTable("FounderRole");
 					x.MapLeftKey("FounderId");
 					x.MapRightKey("FounderRoleTypeId");
+				});
+
+			modelBuilder.Entity<Founder>()
+				.HasMany(x => x.Documents)
+				.WithMany(x => x.Founders)
+				.Map(x => {
+					x.ToTable("FounderDocument");
+					x.MapLeftKey("FounderId");
+					x.MapRightKey("DocumentId");
 				});
 
 			//this ensures that full text searching will be enabled for certain fields

@@ -9,14 +9,6 @@ namespace Wwfd.Core.Agents
 {
 	public class FounderAgent : AgentBase
 	{
-		protected override void CreateDtoMaps()
-		{
-			Mapper.CreateMap<Founder, FounderDto>()
-				.ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.FounderRoles));
-
-			Mapper.CreateMap<FounderRoleType, FounderRoleDto>();
-		}
-
 		public int Save(FounderDto founder, IEnumerable<FounderRoleDto> roles)
 		{
 			var entity = MapToEntity<FounderDto, Founder>(founder);

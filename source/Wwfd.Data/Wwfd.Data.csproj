@@ -59,7 +59,11 @@
     <Compile Include="Context\WwfdContext.cs" />
     <Compile Include="Context\WwfdSchemas.cs" />
     <Compile Include="Enums\DailyQuoteProcessesStatusType.cs" />
+    <Compile Include="Enums\DocumentType.cs" />
     <Compile Include="Schemas\dbo\ContributorRoleType.cs" />
+    <Compile Include="Schemas\dbo\Document.cs" />
+    <Compile Include="Schemas\dbo\DocumentReference.cs" />
+    <Compile Include="Schemas\dbo\DocumentType.cs" />
     <Compile Include="Schemas\dbo\FounderRoleType.cs" />
     <Compile Include="Schemas\dbo\PerformedSearch.cs" />
     <Compile Include="Schemas\dbo\QuoteHistoryType.cs" />
@@ -89,7 +93,7 @@
     <EmbeddedResource Include="Scripts\SeedContributors.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\SeedFounders.sql" />
+    <EmbeddedResource Include="Scripts\SeedFounder.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\SetupFullText.sql" />
@@ -105,6 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\SeedQuoteReferences.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\SeedFounderRoles.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\SeedDocuments.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -63,7 +63,11 @@
   <ItemGroup>
     <Compile Include="Agents\AgentBase.cs" />
     <Compile Include="Agents\FounderAgent.cs" />
+    <Compile Include="Agents\DocumentAgent.cs" />
     <Compile Include="Agents\QuoteAgent.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Dto\DocumentDto.cs" />
+    <Compile Include="Dto\DocumentReferenceDto.cs" />
     <Compile Include="Dto\FounderSearchParametersDto.cs" />
     <Compile Include="Dto\FounderWithQuoteCountDto.cs" />
     <Compile Include="Dto\ContributorDto.cs" />

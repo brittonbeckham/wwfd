@@ -30,17 +30,19 @@ namespace Wwfd.Data.Schemas.dbo
 		[Column(TypeName = "Char")]
 		[StringLength(1)]
 		public string Gender { get; set; }
-		
+
 		[Column(TypeName = "Date")]
 		public DateTime DateBorn { get; set; }
-		
+
 		[Column(TypeName = "Date")]
 		public DateTime DateDied { get; set; }
 
+		[StringLength(80)]
 		public string FullName { get; set; }
 
 		public virtual ICollection<Quote> Quotes { get; set; }
 
 		public virtual ICollection<FounderRoleType> FounderRoles { get; set; }
+		public virtual ICollection<Document> Documents { get; set; }
 	}
 }

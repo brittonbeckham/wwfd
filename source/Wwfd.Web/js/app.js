@@ -59,10 +59,24 @@ app.controller('founderController', ['dataService', '$scope', '$routeParams', fu
 	function init() {
 		wwfdData.getFounderById($routeParams.founderId, loadFounder);
 		wwfdData.getFounderQuotesById($routeParams.founderId, loadQuotes);
+		wwfdData.getFounderDocuments($routeParams.founderId, loadDocs);
 	}
 
 	function loadFounder(data) {
 		$scope.founder = data;
+	}
+
+	function loadDocs(data) {
+		$scope.documents = data;
+
+		//bio found?
+		for (var i = 0; i < $scope.documents.length; i++) {
+			if ($scope.documents[i].DocumentType == 2) {
+				$scope.hasBiography = true;
+				$scope.biography = $scope.documents[i];
+				break;
+			}
+		}
 	}
 
 	function loadQuotes(data) {
@@ -138,7 +152,10 @@ app.service('dataService', ['$http', function ($http) {
 		},
 		searchQuotesByText: function (text, callback) {
 			get('quote/search/text/' + text, callback);
-		}
+		},
+		getFounderDocuments: function (founderId, callback) {
+			get('founder/' + founderId + '/documents', callback);
+		},
 	}
 
 }]);

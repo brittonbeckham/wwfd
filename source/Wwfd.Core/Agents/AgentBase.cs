@@ -18,7 +18,8 @@ namespace Wwfd.Core.Agents
 
 		protected AgentBase()
 		{
-			CreateDtoMaps();
+			if (!Configuration.MapsLoaded)
+				Configuration.LoadAutoMapperMaps();
 		}
 
 		/// <summary>
@@ -62,12 +63,6 @@ namespace Wwfd.Core.Agents
 		}
 
 		#endregion
-
-		/// <summary>
-		/// When overridden in a derived class, contains the AutoMapper code that maps the entity framework class to the Dto
-		/// class.
-		/// </summary>
-		protected abstract void CreateDtoMaps();
 
 		/// <summary>
 		/// Creates a new context transaction. This transaction spans all agents, whether instantiated previous to or after
@@ -135,7 +130,6 @@ namespace Wwfd.Core.Agents
 		/// <returns></returns>
 		protected TEfObject MapToEntity<TDtoObject, TEfObject>(TDtoObject dto)
 		{
-			Mapper.CreateMap<TDtoObject, TEfObject>();
 			return Mapper.Map<TEfObject>(dto);
 		}
 
@@ -149,7 +143,6 @@ namespace Wwfd.Core.Agents
 		/// <returns></returns>
 		protected TEfObject MapToExistingEntity<TDtoObject, TEfObject>(TDtoObject dto, TEfObject existing)
 		{
-			Mapper.CreateMap<TDtoObject, TEfObject>();
 			return Mapper.Map(dto, existing);
 		}
 
@@ -161,11 +154,8 @@ namespace Wwfd.Core.Agents
 		/// <param name="efObject"></param>
 		/// <param name="autoCreateMap"></param>
 		/// <returns></returns>
-		protected TDtoObject MapToDto<TEfObject, TDtoObject>(TEfObject efObject, bool autoCreateMap = true)
+		protected TDtoObject MapToDto<TEfObject, TDtoObject>(TEfObject efObject)
 		{
-			if (autoCreateMap)
-				Mapper.CreateMap<TEfObject, TDtoObject>();
-
 			return Mapper.Map<TDtoObject>(efObject);
 		}
 

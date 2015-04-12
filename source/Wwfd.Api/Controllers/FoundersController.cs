@@ -23,6 +23,13 @@ namespace Wwfd.Api.Controllers
 				return agent.GetById(id);
 		}
 
+		[Route("{id:int}/documents")]
+		public IEnumerable<DocumentDto> GetFounderDocuments(int id)
+		{
+			using (var agent = new DocumentAgent())
+				return agent.GetByFounderId(id);
+		}
+
 		/// <summary>
 		/// Returns all the Founders.
 		/// </summary>

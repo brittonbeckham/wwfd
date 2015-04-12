@@ -12,7 +12,13 @@
 		{{ role.Name }}
 	</div>
 	<div class="clearfix"></div>
+
 	<hr />
+	<h2>Biography</h2>
+	<span ng-hide="hasBiography" class="founder-biography-nofound">Founder biography has not been submitted.</span>
+	<div id="founder-biography" ng-show="hasBiography" ng-bind-html="biography.Text">
+
+	</div>
 
 	<h2>Quotations</h2>
 

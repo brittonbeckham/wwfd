@@ -15,7 +15,6 @@ namespace Wwfd.Core.Dto
 		public DateTime DateBorn { get; set; }
 		public DateTime DateDied { get; set; }
 		public string FullName { get; set; }
-
 		public List<FounderRoleDto> Roles { get; set; }
 
 	}

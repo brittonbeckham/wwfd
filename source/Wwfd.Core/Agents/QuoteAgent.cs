@@ -11,18 +11,6 @@ namespace Wwfd.Core.Agents
 {
 	public class QuoteAgent : AgentBase
 	{
-		protected override void CreateDtoMaps()
-		{
-			Mapper.CreateMap<Founder, FounderDto>();
-			Mapper.CreateMap<QuoteReference, QuoteReferenceDto>();
-
-			Mapper.CreateMap<Quote, QuoteDto>()
-				.ForMember(dest => dest.Founder, opt => opt.MapFrom(src => src.Founder))
-				.ForMember(dest => dest.QuoteStatus, opt => opt.MapFrom(src => src.QuoteStatusType.Name))
-				.ForMember(dest => dest.References, opt => opt.MapFrom(src => src.QuoteReferences));
-
-		}
-
 		/// <summary>
 		/// Searches the quote text and keywords for the given string using SQL full-text searching.
 		/// </summary>
@@ -83,11 +71,11 @@ namespace Wwfd.Core.Agents
 			var entity = CurrentContext.Quotes
 							.Include(r => r.QuoteReferences)
 							.Include(r => r.Founder)
-							.First(r => r.QuoteId == quoteId);
+							.FirstOrDefault(r => r.QuoteId == quoteId);
 
 			ErrorIfEntityIsNull(entity);
 
-			return MapToDto<Quote, QuoteDto>(entity, false);
+			return MapToDto<Quote, QuoteDto>(entity);
 		}
 
 
