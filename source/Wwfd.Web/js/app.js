@@ -4,6 +4,7 @@ app.config([
 	'$routeProvider', function ($routeProvider) {
 		$routeProvider
 			.when('/founder/:founderId', { templateUrl: 'views/founder.html' })
+			.when('/terms/:word', { templateUrl: 'views/terms.html' })
 			.when('/search/:searchString', { templateUrl: 'views/results.html' });
 	}
 ]);
@@ -60,7 +61,17 @@ app.controller('founderController', ['dataService', '$scope', '$routeParams', fu
 		wwfdData.getFounderById($routeParams.founderId, loadFounder);
 		wwfdData.getFounderQuotesById($routeParams.founderId, loadQuotes);
 		wwfdData.getFounderDocuments($routeParams.founderId, loadDocs);
+
 	}
+
+	$scope.initTabs = function () {
+
+		$('.nav-pills a').on('click', function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		});
+
+	};
 
 	function loadFounder(data) {
 		$scope.founder = data;
@@ -97,22 +108,37 @@ app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$
 	function init() {
 		if ($routeParams.searchString != null) {
 			wwfdData.searchQuotesByText($routeParams.searchString, loadQuotes);
-			$scope.searchString = $routeParams.searchString;
+			$scope.searchString = unescape($routeParams.searchString);
 		}
+
+		$scope.highlightsOn = false;
+	}
+
+	$scope.toggleHighlights = function () {
+		$scope.highlightsOn = !$scope.highlightsOn;
+
+		if ($scope.highlightsOn)
+			$('span.highlight-off').addClass('highlight-on');
+		else
+			$('span.highlight-off').removeClass('highlight-on');
 	}
 
 	function loadQuotes(data) {
 		$scope.quotes = data;
 
+		//loop through quotes
 		for (var i = 0; i < $scope.quotes.length; i++) {
 
 			var searchMask = $scope.searchString;
-			var regEx = new RegExp(searchMask, "ig");
-			var replaceMask = "<span class='highlight'>" + $scope.searchString + "</span>";
+			var words = searchMask.split(' ');
 
-			//searchMatch = $sce.trustAsHtml(searchMatch);
+			//loop through each word
+			for (var w = 0; w < words.length; w++) {
+				var regEx = new RegExp(words[w], "ig");
+				var replaceMask = "<span class='highlight-off'>" + words[w] + "</span>";
+				$scope.quotes[i].QuoteText = $scope.quotes[i].QuoteText.replace(regEx, $sce.trustAsHtml(replaceMask));
+			}
 
-			$scope.quotes[i].QuoteText = $scope.quotes[i].QuoteText.replace(regEx, $sce.trustAsHtml(replaceMask));
 			$scope.quotes[i].Keywords = $scope.quotes[i].Keywords.split(', ');
 		}
 	}

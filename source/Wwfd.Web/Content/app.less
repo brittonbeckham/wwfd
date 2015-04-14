@@ -1,9 +1,18 @@
 ﻿@colorDoubleQuote: #999;
-@colorLableBackgroundHover: #ff9d58;
+@boxHoverColor: #ff9d58;
 
 body {
+	color: #333;
 }
 
+a {
+	color: #333;
+
+	&:hover {
+		text-decoration: none;
+		color: @boxHoverColor;
+	}
+}
 
 #content {
 	width: 1200px;
@@ -34,47 +43,112 @@ body {
 	div.quote:last-child > hr {
 		display: none;
 	}
+
+	#result-highlight-toggle{
+		cursor: pointer;
+	}
 }
 
+
+#terms-view {
+	.word {
+		font-weight: bold;
+
+		&:after {
+			font-weight: normal;
+			content: " — ";
+		}
+	}
+}
+
+hr.heavy {
+	border-top: 3px solid #eee;
+}
 
 div.label {
 	margin-right: 4px;
 	cursor: pointer;
 
 	&:hover {
-		background-color: @colorLableBackgroundHover;
+		background-color: @boxHoverColor;
+	}
+
+	a {
+		color: white;
+		text-decoration: none;
 	}
 }
 
+.toggle-switch {
+	color: #999;
+	font-size: 18px;
+	vertical-align: baseline;
 
-
-
-.quote {
-	font-style: italic;
-	margin-bottom: 12px;
-
-	.fa-quote-left {
-		font-style: italic;
-		position: relative;
-		display: inline-block;
-		margin-right: 5px;
-		top: -6px;
-		color: @colorDoubleQuote;
-	}
-
-	.fa-quote-right {
-		font-style: italic;
-		position: relative;
-		display: inline-block;
-		margin-left: 5px;
-		top: -4px;
-		color: @colorDoubleQuote;
-	}
-
-	.highlight {
-		background-color: yellow;
+	&.fa-toggle-on {
+		color: green;
 	}
 }
+
+.quote-container {
+
+	hr {
+		border-style: dashed;
+		margin: 12px 0;
+	}
+
+	.quote {
+		border-radius: 5px;
+		margin-bottom: 15px;
+		padding: 8px 6px;
+
+		.quote-text {
+			font-style: italic;
+		}
+
+		.quote-founder {
+			font-weight: bold;
+			color: #444;
+		}
+
+		&:hover {
+			cursor: default;
+			background-color: rgb(228, 238, 255);
+		}
+
+		.fa-quote-left {
+			font-style: italic;
+			position: relative;
+			display: inline-block;
+			margin-right: 2px;
+			top: -6px;
+			color: @colorDoubleQuote;
+		}
+
+		.fa-quote-right {
+			font-style: italic;
+			position: relative;
+			display: inline-block;
+			margin-left: 1px;
+			top: -4px;
+			color: @colorDoubleQuote;
+		}
+
+		.highlight-off {
+			border-bottom: 1px dotted #444;
+		}
+
+		.highlight-on {
+			background-color: #ffff90;
+		}
+
+
+
+		& .media-body {
+			padding-top: 2px;
+		}
+	}
+}
+
 
 .quote-tags {
 	margin: 8px 0;

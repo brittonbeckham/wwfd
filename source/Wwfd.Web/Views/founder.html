@@ -1,48 +1,90 @@
-﻿<div id="founder-view" ng-controller="founderController">
+﻿<div id="founder-view" ng-controller="founderController" ng-init="initTabs()">
 
-	<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{founder.FullName.replace(' ', '-')}}_thumb.jpg" />
+	<!-- founder header area -->
+	<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{::founder.FullName.replace(' ', '-')}}_thumb.jpg" />
 	<h1>
-		{{founder.FullName}}
+		{{::founder.FullName}}
 	</h1>
 	<h4>
-		{{founder.DateBorn | date : 'MMM yyyy'}} - {{founder.DateDied | date : 'MMM yyyy'}}
+		{{::founder.DateBorn | date : 'MMM yyyy'}} - {{::founder.DateDied | date : 'MMM yyyy'}}
 	</h4>
 
 	<div ng-repeat="role in founder.Roles" class="label label-default">
-		{{ role.Name }}
+		<a href="#/terms/{{::role.Name }}">{{::role.Name }}</a>
 	</div>
 	<div class="clearfix"></div>
 
 	<hr />
-	<h2>Biography</h2>
-	<span ng-hide="hasBiography" class="founder-biography-nofound">Founder biography has not been submitted.</span>
-	<div id="founder-biography" ng-show="hasBiography" ng-bind-html="biography.Text">
 
-	</div>
+	<div role="tabpanel">
 
-	<h2>Quotations</h2>
+		<ul class="nav nav-pills" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#quotes-tab" data-toggle="pill" role="tab" aria-controls="quotes-tab">
+					Quotations
+					<span class="badge">{{ quotes.length}}</span>
+				</a>
 
-	<div class="quote" ng-repeat="quote in quotes">
+			</li>
+			<li role="presentation">
+				<a href="#bio-tab" data-toggle="pill" role="tab" aria-controls="bio-tab">
+					Biography
+					<span class="fa fa-book"></span>
+				</a>
+			</li>
+			<li role="presentation">
+				<a href="#timeline-tab" data-toggle="pill" role="tab" aria-controls="timeline-tab">
+					Timeline
+					<span class="fa fa-calendar"></span>
+				</a>
+			</li>
+		</ul>
 
-		<div>
-			<div class="fa fa-quote-left"></div>
-			<span class="quote-text">{{ quote.QuoteText }}</span>
-			<div class="fa fa-quote-right"></div>
-		</div>
 
-		<div class="quote-tags">
-			<div ng-repeat="word in quote.Keywords" class="label label-info">
-				{{ word | lowercase }}
+		<div class="tab-content">
+
+			<!-- quotes -->
+			<div role="tabpanel" id="quotes-tab" class="tab-pane active">
+				<h2>Quotations</h2>
+				<div class="quote-container" ng-repeat="quote in quotes">
+					<div class="quote">
+
+						<div>
+							<div class="fa fa-quote-left"></div>
+							<span class="quote-text">{{::quote.QuoteText }}</span>
+							<div class="fa fa-quote-right"></div>
+						</div>
+
+						<div class="quote-tags">
+							<div ng-repeat="word in quote.Keywords" class="label label-info">
+								{{::word | lowercase }}
+							</div>
+						</div>
+
+						<div class="quote-references">
+							source:
+							<span ng-repeat="ref in quote.References">
+								{{::ref.ReferenceInformation}}
+							</span>
+						</div>
+					</div>
+					<hr />
+				</div>
 			</div>
-		</div>
 
-		<div class="quote-references">
-			source:
-			<span ng-repeat="ref in quote.References">
-				{{ref.ReferenceInformation}}
-			</span>
+			<!-- bio -->
+			<div role="tabpanel" id="bio-tab" class="tab-pane">
+				<h2>Biography</h2>
+				<span ng-hide="hasBiography">Founder biography has not been submitted.</span>
+				<div id="founder-biography" ng-show="hasBiography" ng-bind-html="biography.Text"></div>
+			</div>
+			
+			<!-- timeline -->
+			<div role="tabpanel" id="timeline-tab" class="tab-pane">
+				<h2>Timeline</h2>
+				<span ng-hide="hasTimeline">Founder timeline has not been generated.</span>
+			</div>
+
 		</div>
-		<hr />
 	</div>
-
 </div>

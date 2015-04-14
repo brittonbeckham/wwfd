@@ -15,10 +15,14 @@
 			<nav>
 
 			</nav>
+			
+			<div class="jumbotron">
+				<h1>What Would the Founders Do?</h1>
 
-			<div class="row">
-				<div class="col-md-12">
-					<input type="text" class="form-control" placeholder="Search 1000s of quotes" ng-model="quoteSearchText" ng-keydown="performSearch($event)" ng-change="searchAutoComplete()" />
+				<div class="row">
+					<div class="col-md-12">
+						<input type="text" class="form-control" placeholder="Search 1000s of quotes" ng-model="quoteSearchText" ng-keydown="performSearch($event)" ng-change="searchAutoComplete()" />
+					</div>
 				</div>
 			</div>
 		</header>
@@ -27,10 +31,14 @@
 
 			<div class="row">
 				<div class="col-sm-3" id="founderSearchBar">
-					<input type="text" id="searchTextFounder" class="form-control input-sm" placeholder="Search founders" ng-model="founderSearchText" ng-change="searchFounders()" ng-keydown="clearFounderSearch($event)">
+					<div>
+						<h3>Search Founders</h3>
+					</div>
+					<input type="text" id="searchTextFounder" class="form-control input-sm" placeholder="Type a founder name" ng-model="founderSearchText" ng-change="searchFounders()" ng-keydown="clearFounderSearch($event)">
 
 					<div ng-repeat="founder in founders">
 						<div>
+							<span class="fa fa-caret-right"></span>
 							<a ng-href="#/founder/{{ founder.FounderId }}">{{ founder.FullName }} ({{ founder.QuoteCount }})</a>
 						</div>
 					</div>

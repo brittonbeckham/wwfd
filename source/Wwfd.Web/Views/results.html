@@ -1,34 +1,48 @@
 ﻿<div id="results-view" ng-controller="resultsController">
 	<h2>Search Results</h2>
 
+	<p>
+		<div class="pull-right" id="result-highlight-toggle" ng-click="toggleHighlights()">
+			<span>Highligh Results:</span>
+			<span class="toggle-switch fa" ng-class="{'fa-toggle-off': !highlightsOn, 'fa-toggle-on': highlightsOn}"></span>
+		</div>
+
+		Your search for <b>{{::searchString}}</b> returned {{::quotes.length }} results.
+	</p>
+	<hr class="heavy" />
+
 	<div class="quote" ng-repeat="quote in quotes">
 		<div class="media">
 			<div class="media-left">
 				<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{quote.Founder.FullName.replace(' ', '-')}}_thumb.jpg" />
 			</div>
 			<div class="media-body">
-				<div class="fa fa-quote-left"></div>
-				<span ng-bind-html="quote.QuoteText" class="quote-text"></span>
-				<div class="fa fa-quote-right"></div>
+				<div class="quote-container">
+					<div class="quote">
+						<div class="fa fa-quote-left"></div>
+						<span ng-bind-html="quote.QuoteText" class="quote-text"></span>
+						<div class="fa fa-quote-right"></div>
+						<div class="quote-founder text-left">
+							—{{quote.Founder.FullName}}
+						</div>
 
-				<div class="quote-founder text-left">
-					—{{quote.Founder.FullName}}
-				</div>
+						<div class="quote-tags">
+							<div ng-repeat="word in quote.Keywords" class="label label-info">
+								{{ word | lowercase }}
+							</div>
+						</div>
 
-				<div class="quote-tags">
-					<div ng-repeat="word in quote.Keywords" class="label label-info">
-						{{ word | lowercase }}
+						<div class="quote-references">
+							source:
+							<span ng-repeat="ref in quote.References">
+								{{ref.ReferenceInformation}}
+							</span>
+						</div>
 					</div>
-				</div>
-
-				<div class="quote-references">
-					source:
-					<span ng-repeat="ref in quote.References">
-						{{ref.ReferenceInformation}}
-					</span>
+					<hr />
 				</div>
 			</div>
 		</div>
-		<hr class="quote-divider" />
+
 	</div>
 </div>
