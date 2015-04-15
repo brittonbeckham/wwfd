@@ -6,21 +6,38 @@ a {
 }
 a:hover {
   text-decoration: none;
-  color: #ff9d58;
 }
 #content {
   width: 1200px;
 }
+#quote-view h3 {
+  text-align: center;
+}
+#quote-view .addthis_native_toolbox {
+  text-align: center;
+  margin: auto;
+}
+#quote-view h2,
 #founder-view h2 {
   margin-bottom: 25px;
 }
+#quote-view img.founder-thumbnail,
 #founder-view img.founder-thumbnail {
   border-radius: 40%;
   float: left;
   margin-right: 15px;
 }
+#quote-view div.quote:last-child > hr,
 #founder-view div.quote:last-child > hr {
   display: none;
+}
+#quote-view ul.nav li span.fa,
+#founder-view ul.nav li span.fa {
+  color: #999;
+}
+#quote-view ul.nav li.active span.fa,
+#founder-view ul.nav li.active span.fa {
+  color: white;
 }
 #results-view img.founder-thumbnail {
   width: 55px;
@@ -73,13 +90,15 @@ div.label a {
 .quote-container .quote .quote-text {
   font-style: italic;
 }
+.quote-container .quote a.quote-text:hover {
+  text-decoration: underline;
+}
 .quote-container .quote .quote-founder {
   font-weight: bold;
   color: #444;
 }
 .quote-container .quote:hover {
-  cursor: default;
-  background-color: #e4eeff;
+  background-color: #ffffea;
 }
 .quote-container .quote .fa-quote-left {
   font-style: italic;
@@ -106,9 +125,9 @@ div.label a {
 .quote-container .quote .media-body {
   padding-top: 2px;
 }
-.quote-tags {
+.quote-container .quote-tags {
   margin: 8px 0;
 }
-.quote-references {
+.quote-container .quote-references {
   font-size: smaller;
 }

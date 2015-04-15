@@ -38,6 +38,12 @@
 					<span class="fa fa-calendar"></span>
 				</a>
 			</li>
+			<li role="presentation">
+				<a href="#docs-tab" data-toggle="pill" role="tab" aria-controls="doc-tab">
+					Related Documents
+					<span class="fa fa-file"></span>
+				</a>
+			</li>
 		</ul>
 
 
@@ -49,11 +55,13 @@
 				<div class="quote-container" ng-repeat="quote in quotes">
 					<div class="quote">
 
-						<div>
-							<div class="fa fa-quote-left"></div>
-							<span class="quote-text">{{::quote.QuoteText }}</span>
-							<div class="fa fa-quote-right"></div>
-						</div>
+						<a href="#/quote/{{::quote.QuoteId}}" class="quote-text">
+							<div>
+								<span class="fa fa-quote-left"></span>
+								{{::quote.QuoteText }}
+								<span class="fa fa-quote-right"></span>
+							</div>
+						</a>
 
 						<div class="quote-tags">
 							<div ng-repeat="word in quote.Keywords" class="label label-info">
@@ -78,7 +86,7 @@
 				<span ng-hide="hasBiography">Founder biography has not been submitted.</span>
 				<div id="founder-biography" ng-show="hasBiography" ng-bind-html="biography.Text"></div>
 			</div>
-			
+
 			<!-- timeline -->
 			<div role="tabpanel" id="timeline-tab" class="tab-pane">
 				<h2>Timeline</h2>

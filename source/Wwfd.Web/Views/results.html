@@ -19,12 +19,17 @@
 			<div class="media-body">
 				<div class="quote-container">
 					<div class="quote">
-						<div class="fa fa-quote-left"></div>
-						<span ng-bind-html="quote.QuoteText" class="quote-text"></span>
-						<div class="fa fa-quote-right"></div>
+						<a href="#/quote/{{::quote.QuoteId}}" class="quote-text">
+							<div>
+								<span class="fa fa-quote-left"></span>
+								<span ng-bind-html="quote.QuoteText" class="quote-text"></span>
+								<span class="fa fa-quote-right"></span>
+							</div>
+						</a>
 						<div class="quote-founder text-left">
 							—{{quote.Founder.FullName}}
 						</div>
+
 
 						<div class="quote-tags">
 							<div ng-repeat="word in quote.Keywords" class="label label-info">

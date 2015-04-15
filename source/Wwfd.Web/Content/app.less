@@ -1,5 +1,9 @@
 ﻿@colorDoubleQuote: #999;
 @boxHoverColor: #ff9d58;
+@linkHoverColor: #5fb1ff;
+@highlightResultColor: #ffff90;
+@quoteBoxHoverColor: #ffffea;
+
 
 body {
 	color: #333;
@@ -10,7 +14,7 @@ a {
 
 	&:hover {
 		text-decoration: none;
-		color: @boxHoverColor;
+		//color: @linkHoverColor;
 	}
 }
 
@@ -18,6 +22,18 @@ a {
 	width: 1200px;
 }
 
+#quote-view {
+	h3 {
+		text-align: center;
+	}
+
+	.addthis_native_toolbox {
+		text-align: center;
+		margin: auto;
+	}
+}
+
+#quote-view,
 #founder-view {
 	h2 {
 		margin-bottom: 25px;
@@ -32,6 +48,14 @@ a {
 	div.quote:last-child > hr {
 		display: none;
 	}
+
+	ul.nav li span.fa {
+		color: #999;
+	}
+
+	ul.nav li.active span.fa {
+		color: white;
+	}
 }
 
 #results-view {
@@ -44,7 +68,7 @@ a {
 		display: none;
 	}
 
-	#result-highlight-toggle{
+	#result-highlight-toggle {
 		cursor: pointer;
 	}
 }
@@ -89,6 +113,8 @@ div.label {
 	}
 }
 
+
+
 .quote-container {
 
 	hr {
@@ -105,14 +131,18 @@ div.label {
 			font-style: italic;
 		}
 
+		a.quote-text:hover:extend(a.quote-text) {
+			text-decoration: underline;
+		}
+
 		.quote-founder {
 			font-weight: bold;
 			color: #444;
 		}
 
 		&:hover {
-			cursor: default;
-			background-color: rgb(228, 238, 255);
+			//cursor: default;
+			background-color: @quoteBoxHoverColor;
 		}
 
 		.fa-quote-left {
@@ -138,7 +168,7 @@ div.label {
 		}
 
 		.highlight-on {
-			background-color: #ffff90;
+			background-color: @highlightResultColor;
 		}
 
 
@@ -147,13 +177,12 @@ div.label {
 			padding-top: 2px;
 		}
 	}
-}
 
+	.quote-tags {
+		margin: 8px 0;
+	}
 
-.quote-tags {
-	margin: 8px 0;
-}
-
-.quote-references {
-	font-size: smaller;
+	.quote-references {
+		font-size: smaller;
+	}
 }

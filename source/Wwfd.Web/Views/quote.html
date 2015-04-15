@@ -1,0 +1,49 @@
+﻿<div id="quote-view" ng-controller="quoteController" ng-init="addthis.layers.refresh();">
+	<!-- founder header area -->
+	<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{::founder.FullName.replace(' ', '-')}}_thumb.jpg" />
+	<h1>
+		{{::founder.FullName}}
+	</h1>
+	<h4>
+		{{::founder.DateBorn | date : 'MMM yyyy'}} - {{::founder.DateDied | date : 'MMM yyyy'}}
+	</h4>
+
+	<div ng-repeat="role in founder.Roles" class="label label-default">
+		<a href="#/terms/{{::role.Name }}">{{::role.Name }}</a>
+	</div>
+	<div class="clearfix"></div>
+
+	<hr />
+
+	<h2>Quotation # {{::quote.QuoteId}}</h2>
+
+	<div class="quote-container">
+		<div class="quote">
+			<div>
+				<span class="fa fa-quote-left"></span>
+				{{::quote.QuoteText }}
+				<span class="fa fa-quote-right"></span>
+			</div>
+
+			<div class="quote-tags">
+				<div ng-repeat="word in quote.Keywords" class="label label-info">
+					{{::word | lowercase }}
+				</div>
+			</div>
+
+			<div class="quote-references">
+				source:
+				<span ng-repeat="ref in quote.References">
+					{{::ref.ReferenceInformation}}
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<h3>Share This Quote<div class="addthis_sharing_toolbox"></div></h3>
+
+	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+</div>
+
+

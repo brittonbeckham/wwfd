@@ -5,6 +5,7 @@ app.config([
 		$routeProvider
 			.when('/founder/:founderId', { templateUrl: 'views/founder.html' })
 			.when('/terms/:word', { templateUrl: 'views/terms.html' })
+			.when('/quote/:quoteId', { templateUrl: 'views/quote.html' })
 			.when('/search/:searchString', { templateUrl: 'views/results.html' });
 	}
 ]);
@@ -101,6 +102,27 @@ app.controller('founderController', ['dataService', '$scope', '$routeParams', fu
 	return {};
 }]);
 
+
+
+app.controller('quoteController', ['dataService', '$scope', '$routeParams', function (wwfdData, $scope, $routeParams) {
+
+	init();
+
+	function init() {
+		wwfdData.getQuoteById($routeParams.quoteId, loadQuote);
+		
+	}
+
+	function loadQuote(data) {
+		$scope.quote = data;
+		$scope.founder = data.Founder;
+	}
+
+	return {};
+}]);
+
+
+
 app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$compile', '$sce', function (wwfdData, $scope, $routeParams, $compile, $sce) {
 
 	init();
@@ -181,6 +203,9 @@ app.service('dataService', ['$http', function ($http) {
 		},
 		getFounderDocuments: function (founderId, callback) {
 			get('founder/' + founderId + '/documents', callback);
+		},
+		getQuoteById: function (quoteId, callback) {
+			get('quote/' + quoteId, callback);
 		},
 	}
 
