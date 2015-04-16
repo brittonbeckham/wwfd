@@ -20,14 +20,12 @@
 	<div class="quote-container">
 		<div class="quote">
 			<div>
-				<span class="fa fa-quote-left"></span>
-				{{::quote.QuoteText }}
-				<span class="fa fa-quote-right"></span>
+				<span class="fa fa-quote-left"></span>{{::quote.QuoteText }}<span class="fa fa-quote-right"></span>
 			</div>
 
 			<div class="quote-tags">
 				<div ng-repeat="word in quote.Keywords" class="label label-info">
-					{{::word | lowercase }}
+					<a href="#/search/keyword/">{{::word | lowercase }}</a>
 				</div>
 			</div>
 

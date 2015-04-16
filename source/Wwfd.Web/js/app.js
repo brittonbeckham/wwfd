@@ -6,7 +6,8 @@ app.config([
 			.when('/founder/:founderId', { templateUrl: 'views/founder.html' })
 			.when('/terms/:word', { templateUrl: 'views/terms.html' })
 			.when('/quote/:quoteId', { templateUrl: 'views/quote.html' })
-			.when('/search/:searchString', { templateUrl: 'views/results.html' });
+			.when('/search/text/:searchString', { templateUrl: 'views/results.html' })
+			.when('/search/keyword/:keyword', { templateUrl: 'views/results.html' });
 	}
 ]);
 
@@ -38,17 +39,13 @@ app.controller('appController', ['dataService', '$scope', '$location', function 
 
 		if ($event.keyCode == 13) {
 			var search = encodeURIComponent($scope.quoteSearchText);
-			$location.path('/search/' + search);
+			$location.path('/search/text/' + search);
 
 		}
 	}
 
 	function loadFounders(data) {
 		$scope.founders = data;
-	}
-
-	function loadQuotes(data) {
-
 	}
 
 	return {};
@@ -92,10 +89,7 @@ app.controller('founderController', ['dataService', '$scope', '$routeParams', fu
 	}
 
 	function loadQuotes(data) {
-		$scope.quotes = data;
-
-		for (var i = 0; i < $scope.quotes.length; i++)
-			$scope.quotes[i].Keywords = $scope.quotes[i].Keywords.split(', ');
+		$scope.quotes = wwfdData.seperateKeywords(data);
 	}
 
 
@@ -109,8 +103,7 @@ app.controller('quoteController', ['dataService', '$scope', '$routeParams', func
 	init();
 
 	function init() {
-		wwfdData.getQuoteById($routeParams.quoteId, loadQuote);
-		
+		wwfdData.getQuoteById($routeParams.quoteId, loadQuote);		
 	}
 
 	function loadQuote(data) {
@@ -132,6 +125,10 @@ app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$
 			wwfdData.searchQuotesByText($routeParams.searchString, loadQuotes);
 			$scope.searchString = unescape($routeParams.searchString);
 		}
+		if ($routeParams.keyword != null) {
+			wwfdData.searchQuotesByKeyword($routeParams.keyword, loadQuotes);
+			$scope.keyword = $routeParams.keyword;
+		}
 
 		$scope.highlightsOn = false;
 	}
@@ -146,7 +143,7 @@ app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$
 	}
 
 	function loadQuotes(data) {
-		$scope.quotes = data;
+		$scope.quotes = wwfdData.seperateKeywords(data);
 
 		//loop through quotes
 		for (var i = 0; i < $scope.quotes.length; i++) {
@@ -160,8 +157,6 @@ app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$
 				var replaceMask = "<span class='highlight-off'>" + words[w] + "</span>";
 				$scope.quotes[i].QuoteText = $scope.quotes[i].QuoteText.replace(regEx, $sce.trustAsHtml(replaceMask));
 			}
-
-			$scope.quotes[i].Keywords = $scope.quotes[i].Keywords.split(', ');
 		}
 	}
 
@@ -201,12 +196,21 @@ app.service('dataService', ['$http', function ($http) {
 		searchQuotesByText: function (text, callback) {
 			get('quote/search/text/' + text, callback);
 		},
+		searchQuotesByKeyword: function (keyword, callback) {
+			get('quote/search/keyword/' + keyword, callback);
+		},
 		getFounderDocuments: function (founderId, callback) {
 			get('founder/' + founderId + '/documents', callback);
 		},
 		getQuoteById: function (quoteId, callback) {
 			get('quote/' + quoteId, callback);
 		},
+		seperateKeywords: function(quotes) {
+			for (var i = 0; i < quotes.length; i++)
+				quotes[i].Keywords = quotes[i].Keywords.split(', ');
+
+			return quotes;
+		}
 	}
 
 }]);

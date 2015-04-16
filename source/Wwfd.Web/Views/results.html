@@ -7,7 +7,8 @@
 			<span class="toggle-switch fa" ng-class="{'fa-toggle-off': !highlightsOn, 'fa-toggle-on': highlightsOn}"></span>
 		</div>
 
-		Your search for <b>{{::searchString}}</b> returned {{::quotes.length }} results.
+		<span ng-show="searchString">Your search for <b>{{::searchString}}</b> returned {{::quotes.length }} results.</span>
+		<span ng-show="keyword">Showing quotes related to <b>{{::keyword}}</b>; returned {{::quotes.length }} results.</span>
 	</p>
 	<hr class="heavy" />
 
@@ -21,9 +22,7 @@
 					<div class="quote">
 						<a href="#/quote/{{::quote.QuoteId}}" class="quote-text">
 							<div>
-								<span class="fa fa-quote-left"></span>
-								<span ng-bind-html="quote.QuoteText" class="quote-text"></span>
-								<span class="fa fa-quote-right"></span>
+								<span class="fa fa-quote-left"></span><span ng-bind-html="quote.QuoteText" class="quote-text"></span><span class="fa fa-quote-right"></span>
 							</div>
 						</a>
 						<div class="quote-founder text-left">
@@ -33,7 +32,7 @@
 
 						<div class="quote-tags">
 							<div ng-repeat="word in quote.Keywords" class="label label-info">
-								{{ word | lowercase }}
+								<a href="#/search/keyword/{{::word | lowercase }}">{{::word | lowercase }}</a>
 							</div>
 						</div>
 
