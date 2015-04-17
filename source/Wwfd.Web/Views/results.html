@@ -12,10 +12,13 @@
 	</p>
 	<hr class="heavy" />
 
-	<div class="quote" ng-repeat="quote in quotes">
+	<div class="results" ng-repeat="quote in quotes">
 		<div class="media">
 			<div class="media-left">
-				<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{quote.Founder.FullName.replace(' ', '-')}}_thumb.jpg" />
+				<a href="#/founder/{{::quote.Founder.FounderId}}">
+					<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{::quote.Founder.FullName.replace(' ', '-')}}_thumb.jpg" alt="" 
+						 data-toggle="tooltip" data-placement="top" title="See all quotes from {{::quote.Founder.FullName}}" />
+				</a>
 			</div>
 			<div class="media-body">
 				<div class="quote-container">
@@ -26,7 +29,7 @@
 							</div>
 						</a>
 						<div class="quote-founder text-left">
-							—{{quote.Founder.FullName}}
+							—{{::quote.Founder.FullName}}
 						</div>
 
 
@@ -39,7 +42,7 @@
 						<div class="quote-references">
 							source:
 							<span ng-repeat="ref in quote.References">
-								{{ref.ReferenceInformation}}
+								{{::ref.ReferenceInformation}}
 							</span>
 						</div>
 					</div>

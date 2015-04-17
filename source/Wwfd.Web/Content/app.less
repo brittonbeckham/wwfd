@@ -18,6 +18,50 @@ a {
 	}
 }
 
+#side-bar {
+	.founder {
+		display: block;
+		border-radius: 5px;
+		padding: 2px;
+
+		&:hover {
+			background-color: #eee;
+		}
+
+		&:focus {
+			text-decoration: none;
+		}
+
+		div.badge-wrapper {
+			display: inline-block;
+			width: 35px;
+			//text-align: center;
+		}
+
+		span.badge {
+			vertical-align: top;
+			margin-top: 1px;
+			display: inline-block;
+			//min-width: 30px;
+		}
+	}
+
+	#founder-search-results {
+		border: 1px solid #eee;
+		padding: 4px;
+		border-radius: 5px;
+		height: 0;
+		-webkit-transition: height 250ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+		-moz-transition: height 250ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+		-o-transition: height 250ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+		transition: height 250ms cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+		&.empty {
+			visibility: hidden;
+			height: 0;
+		}
+	}
+}
+
 #content {
 	width: 1200px;
 }
@@ -127,12 +171,13 @@ div.label {
 		margin-bottom: 15px;
 		padding: 8px 6px;
 
-		.quote-text {
+		span.quote-text {
 			font-style: italic;
 		}
 
 		a.quote-text:hover:extend(a.quote-text) {
-			text-decoration: underline;
+			text-decoration: none;
+			background-color: cornflowerblue;
 		}
 
 		.quote-founder {

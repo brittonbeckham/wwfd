@@ -1,4 +1,4 @@
-﻿<div id="quote-view" ng-controller="quoteController" ng-init="addthis.layers.refresh();">
+﻿<div id="quote-view" ng-controller="quoteController">
 	<!-- founder header area -->
 	<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{::founder.FullName.replace(' ', '-')}}_thumb.jpg" />
 	<h1>
@@ -20,7 +20,7 @@
 	<div class="quote-container">
 		<div class="quote">
 			<div>
-				<span class="fa fa-quote-left"></span>{{::quote.QuoteText }}<span class="fa fa-quote-right"></span>
+				<span class="fa fa-quote-left"></span><span class="quote-text">{{::quote.QuoteText }}</span><span class="fa fa-quote-right"></span>
 			</div>
 
 			<div class="quote-tags">
