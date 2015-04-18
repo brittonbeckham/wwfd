@@ -24,11 +24,10 @@ namespace Wwfd.Core.Agents
 			{
 				BeginContextTrans();
 
-				if(recordSearch)
+				if (recordSearch)
 				{
 					//always save a record of each search performed for analytics purposes
-					CurrentContext.PerformedSerarches.Add(new PerformedSearch()
-					{
+					CurrentContext.PerformedSerarches.Add(new PerformedSearch() {
 						DateSearched = DateTime.Now,
 						TextSearchString = searchText,
 						KeywordSearchString = searchKeyword,
@@ -36,7 +35,7 @@ namespace Wwfd.Core.Agents
 
 					CurrentContext.SaveChanges();
 				}
-				
+
 				if (searchText != null)
 					searchText = FullTextSearchInterceptor.AsFullTextSearch(searchText);
 
@@ -61,7 +60,7 @@ namespace Wwfd.Core.Agents
 			}
 			finally
 			{
-				if(!error)
+				if (!error)
 					CommitContextTrans();
 			}
 		}

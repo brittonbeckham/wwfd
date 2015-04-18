@@ -16,6 +16,7 @@ app.controller('appController', ['dataService', '$scope', '$location', function 
 	init();
 
 	function init() {
+		$scope.subscribed = false;
 		//wwfdData.getAllFounders(loadFounders);
 	}
 
@@ -26,6 +27,16 @@ app.controller('appController', ['dataService', '$scope', '$location', function 
 			$scope.founders = null;
 			//wwfdData.getAllFounders(loadFounders);
 		}
+	}
+
+	$scope.subscribe = function () {
+		wwfdData.subscribeToDailyQuotes($scope.subscriberEmail,
+			//success
+			function () {
+				$scope.subscribed = true;
+
+			}
+		);
 	}
 
 	$scope.searchFounders = function () {
@@ -196,7 +207,19 @@ app.service('dataService', ['$http', function ($http) {
 			});
 	}
 
+	function post(url, postData, callback, error) {
+		$http.post(baseurl + url, postData)
+			.success(function (data) {
+				callback(data);
+			})
+			.error(function (data) {
+				error(data);
+			});
+	}
+
 	return {
+
+		//founders
 		getAllFounders: function (callback) {
 			get('founder/all/quotecount', callback);
 		},
@@ -209,18 +232,28 @@ app.service('dataService', ['$http', function ($http) {
 		getFounderQuotesById: function (id, callback) {
 			get('quote/founder/' + id, callback);
 		},
+		getFounderDocuments: function (founderId, callback) {
+			get('founder/' + founderId + '/documents', callback);
+		},
+
+		//quotes
+		getQuoteById: function (quoteId, callback) {
+			get('quote/' + quoteId, callback);
+		},
 		searchQuotesByText: function (text, callback) {
 			get('quote/search/text/' + text, callback);
 		},
 		searchQuotesByKeyword: function (keyword, callback) {
 			get('quote/search/keyword/' + keyword, callback);
 		},
-		getFounderDocuments: function (founderId, callback) {
-			get('founder/' + founderId + '/documents', callback);
+
+
+		//daily quotes
+		subscribeToDailyQuotes: function (email, callback, errorCallback) {
+			post('dailyquotes/subscribe/', {email: email}, callback, errorCallback);
 		},
-		getQuoteById: function (quoteId, callback) {
-			get('quote/' + quoteId, callback);
-		},
+
+		//other
 		seperateKeywords: function (quotes) {
 			for (var i = 0; i < quotes.length; i++)
 				quotes[i].Keywords = quotes[i].Keywords.split(', ');

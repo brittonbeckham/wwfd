@@ -40,7 +40,7 @@ namespace Wwfd.Data.Context
 		public DbSet<PerformedSearch> PerformedSerarches { get; set; }
 
 		//DailyQuote
-		public DbSet<DailyQuoteSubscriber> DailuQuoteSubscribers { get; set; }
+		public DbSet<DailyQuoteSubscriber> DailyQuoteSubscribers { get; set; }
 		public DbSet<DailyQuote> DailyQuotes { get; set; }
 		public DbSet<DailyQuoteProcess> DailyQuoteProcesses { get; set; }
 		public DbSet<DailyQuoteProcessStatusType> DailyQuoteProcessesStatusTypes { get; set; }

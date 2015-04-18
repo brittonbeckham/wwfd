@@ -9,32 +9,61 @@
 </head>
 <body ng-controller="appController as ctrl">
 
-	<div id="content" class="container">
+	<div id="content-view" class="container">
 
 		<header>
-			<nav>
-
-			</nav>
 
 			<div class="jumbotron">
 				<h1>What Would the Founders Do?</h1>
 
 				<div class="row">
 					<div class="col-md-12">
-						<input type="text" class="form-control" placeholder="Search 1000s of quotes" ng-model="quoteSearchText" ng-keydown="performSearch($event)" ng-change="searchAutoComplete()" />
+						<input type="text" class="form-control input-lg" placeholder="Search 1000s of quotes" ng-model="quoteSearchText" ng-keydown="performSearch($event)" ng-change="searchAutoComplete()" />
 					</div>
 				</div>
+				<nav>
+
+				</nav>
 			</div>
 		</header>
 
 		<div id="side-bar" class="container">
 
+
 			<div class="row">
-				<div class="col-sm-3" id="founderSearchBar">
-					<div>
-						<h3>Search Founders</h3>
+
+				<!-- left side bar -->
+				<div class="col-sm-3" id="side-bar">
+
+					<h3>Quote of the Day</h3>
+					<div id="subscriber-area">
+
+						<div ng-hide="subscribed">
+
+							<span class="small">
+								Enter your email and get daily quotes of insight from the Founders sent to your inbox!
+							</span>
+							<div class="form-inline">
+								<input type="text" class="form-control input-sm" placeholder="Enter your email" ng-model="subscriberEmail">
+								<button class="btn btn-sm btn-primary" ng-click="subscribe()">
+									Subscribe
+								</button>
+							</div>
+						</div>
+
+						<div ng-show="subscribed" class="subscribed-success small">
+							You are now subscribed!<br /><br />
+							Make sure to whitelist dailyquote@whatwouldthefoundersdo.org to avoid spam filters!
+						</div>
 					</div>
+
+					<hr class="dotted" />
+					<h3>Search Founders</h3>
 					<input type="text" id="searchTextFounder" class="form-control input-sm" placeholder="Type a founder name" ng-model="founderSearchText" ng-change="searchFounders()" ng-keydown="clearFounderSearch($event)">
+
+					<span>
+						Search by name to access quotes, biography and more information about a Founder directly.
+					</span>
 
 					<div id="founder-search-results" ng-class="{empty: !founders, active: !!founders}">
 						<a ng-href="#/founder/{{ founder.FounderId }}" ng-repeat="founder in founders" class="founder">
@@ -47,6 +76,7 @@
 					</div>
 				</div>
 
+				<!-- main view port -->
 				<div class="col-sm-9" ng-view></div>
 			</div>
 		</div>
