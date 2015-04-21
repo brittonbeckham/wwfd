@@ -10,9 +10,19 @@ namespace Wwfd.Data.Context
 	public class FullTextSearchInterceptor : IDbCommandInterceptor
 	{
 		private const string FULL_TEXT_PREFIX = "-FTSPREFIX-";
+		
 		public static string AsFullTextSearch(string search)
 		{
-			return string.Format("({0}{1})", FULL_TEXT_PREFIX, search);
+			string replacement = string.Format("({0}{1})", FULL_TEXT_PREFIX,
+				search
+					.Trim()
+					.Replace("  ", " ")
+					.Replace("   ", " ")
+					.Replace(" and ", "^")
+					.Replace(" ", " AND ")
+					.Replace("^", " AND "));
+
+			return replacement;
 		}
 		public void NonQueryExecuting(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
 		{
