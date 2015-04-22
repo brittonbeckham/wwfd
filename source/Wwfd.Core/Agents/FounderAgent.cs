@@ -63,6 +63,33 @@ namespace Wwfd.Core.Agents
 					.ToArray();
 		}
 
+		public IEnumerable<FounderWithQuoteCountExtendedDto> GetAllWithQuoteCountExtended()
+		{
+			IQueryable<FounderWithQuoteCountExtendedDto> x = CurrentContext.Founders
+					.Join(CurrentContext.Quotes, 
+						f => f.FounderId, 
+						q => q.FounderId, (f, q) => new {f,q})
+					.GroupBy(@t => new {
+						@t.q.FounderId,
+						@t.f.FullName,
+						@t.f.FirstName,
+						@t.f.LastName,
+						@t.f.DateBorn,
+						@t.f.DateDied,
+					}, @t => @t.q)
+					.OrderBy(r => r.Key.FullName)
+					.Select(grp1 => new FounderWithQuoteCountExtendedDto {
+						FirstName = grp1.Key.FirstName,
+						LastName = grp1.Key.LastName,
+						DateBorn = grp1.Key.DateBorn,
+						DateDied = grp1.Key.DateDied,
+						FounderId = grp1.Key.FounderId,
+						QuoteCount = grp1.Count()
+					});
+
+			return x.ToArray();
+		}
+
 		public IEnumerable<FounderWithQuoteCountDto> GetWithQuoteCountByName(string firstName, string lastName)
 		{
 			IQueryable<FounderWithQuoteCountDto> x = CurrentContext.Founders

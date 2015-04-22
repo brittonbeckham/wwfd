@@ -1,0 +1,35 @@
+﻿<div id="founders-view" ng-controller="foundersController">
+	<h2>
+		The American Founders
+	</h2>
+	<p>
+		Below is a table of the American Founders, framers and influencers who partisipated establishment of
+		the United States of America.
+	</p>
+
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>First</th>
+				<th>Last</th>
+				<th>Quotes</th>
+				<th>Birth</th>
+				<th>Death</th>
+				<!--<th>Roles</th>-->
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-click="go('/founder/' + founder.FounderId )" ng-repeat=" founder in founders" class="founder-row">
+				<td>{{:: founder.FirstName}}</td>
+				<td>{{:: founder.LastName}}</td>
+				<td>
+					<span class="badge">
+						{{:: founder.QuoteCount}}
+					</span>
+				</td>
+				<td>{{:: founder.DateBorn | date : 'MMM dd, yyyy' }}</td>
+				<td>{{:: founder.DateDied | date : 'MMM dd, yyyy' }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

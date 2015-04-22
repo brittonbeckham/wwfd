@@ -35,10 +35,10 @@ namespace Wwfd.Api.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[Route("all")]
-		public IEnumerable<FounderDto> GetAll()
+		public IEnumerable<FounderWithQuoteCountExtendedDto> GetAll()
 		{
 			using (var agent = new FounderAgent())
-				return agent.GetAll();
+				return agent.GetAllWithQuoteCountExtended();
 		}
 
 		[Route("all/quotecount")]

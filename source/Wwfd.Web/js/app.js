@@ -3,6 +3,7 @@
 app.config([
 	'$routeProvider', function ($routeProvider) {
 		$routeProvider
+			.when('/founders', { templateUrl: 'views/founders.html' })
 			.when('/founder/:founderId', { templateUrl: 'views/founder.html' })
 			.when('/terms/:word', { templateUrl: 'views/terms.html' })
 			.when('/quote/:quoteId', { templateUrl: 'views/quote.html' })
@@ -20,6 +21,7 @@ app.controller('appController', ['dataService', '$scope', '$location', function 
 		//wwfdData.getAllFounders(loadFounders);
 	}
 
+	$scope.location = $location;
 	$scope.clearFounderSearch = function ($event) {
 
 		if ($event.keyCode === 27) {
@@ -134,6 +136,24 @@ app.controller('quoteController', ['dataService', '$scope', '$routeParams', func
 	return {};
 }]);
 
+app.controller('foundersController', ['dataService', '$scope', '$routeParams', '$location', function (wwfdData, $scope, $routeParams, $location) {
+
+	init();
+
+	function init() {
+		wwfdData.getAllFounders(loadFounders);
+	}
+
+	function loadFounders(data) {
+		$scope.founders = data;
+	}
+
+	$scope.go = function (path) {
+		$location.path(path);
+	};
+
+	return {};
+}]);
 
 
 app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$compile', '$sce', '$timeout', function (wwfdData, $scope, $routeParams, $compile, $sce, $timeout) {
@@ -221,7 +241,7 @@ app.service('dataService', ['$http', function ($http) {
 
 		//founders
 		getAllFounders: function (callback) {
-			get('founder/all/quotecount', callback);
+			get('founder/all', callback);
 		},
 		searchFounders: function (searchString, callback) {
 			get('founder/search/' + searchString + '/quotecount', callback);

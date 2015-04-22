@@ -10,6 +10,19 @@ a:hover {
 hr.dotted {
   border-style: dotted;
 }
+.jumbotron {
+  padding-bottom: 12px;
+  margin-bottom: 0;
+  border-radius: 0 !important;
+}
+header nav {
+  padding: 0px 60px;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+#content-view {
+  width: 1200px;
+}
 #side-bar .founder {
   display: block;
   border-radius: 5px;
@@ -59,9 +72,6 @@ hr.dotted {
   visibility: hidden;
   height: 0;
 }
-#content {
-  width: 1200px;
-}
 #quote-view h3 {
   text-align: center;
 }
@@ -99,6 +109,9 @@ hr.dotted {
   display: none;
 }
 #results-view #result-highlight-toggle {
+  cursor: pointer;
+}
+#founders-view .founder-row {
   cursor: pointer;
 }
 #terms-view .word {

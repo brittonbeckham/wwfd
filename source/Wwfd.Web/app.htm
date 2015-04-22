@@ -9,10 +9,8 @@
 </head>
 <body ng-controller="appController as ctrl">
 
-	<div id="content-view" class="container">
-
+	<div id="site-wrapper" class="container">
 		<header>
-
 			<div class="jumbotron">
 				<h1>What Would the Founders Do?</h1>
 
@@ -21,19 +19,42 @@
 						<input type="text" class="form-control input-lg" placeholder="Search 1000s of quotes" ng-model="quoteSearchText" ng-keydown="performSearch($event)" ng-change="searchAutoComplete()" />
 					</div>
 				</div>
-				<nav>
-
-				</nav>
+				
 			</div>
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">Home</a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li ng-class="{'active' : (location.path() == '/founders')}"><a href="#/founders">Founders</a></li>
+							<li ng-class="{'active' : (location.path() == '/documents')}"><a href="#/documents">Documents</a></li>
+							<li ng-class="{'active' : (location.path() == '/timeline')}"><a href="#/timeline">Timeline</a></li>
+							<li ng-class="{'active' : (location.path() == '/dailyquote')}"><a href="#/dailyquote">Daily Quote</a></li>
+							<li ng-class="{'active' : (location.path() == '/about')}"><a href="#/about">About</a></li>
+							<li ng-class="{'active' : (location.path() == '/contribute')}"><a href="#/contribute">Contribute</a></li>
+						</ul>
+
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
 		</header>
 
-		<div id="side-bar" class="container">
-
-
+		<div id="site-content" class="container">
+			
 			<div class="row">
 
 				<!-- left side bar -->
-				<div class="col-sm-3" id="side-bar">
+				<div id="side-bar" class="col-sm-3">
 
 					<h3>Quote of the Day</h3>
 					<div id="subscriber-area">
@@ -77,7 +98,7 @@
 				</div>
 
 				<!-- main view port -->
-				<div class="col-sm-9" ng-view></div>
+				<div id="site-viewport" class="col-sm-9" ng-view></div>
 			</div>
 		</div>
 	</div>
