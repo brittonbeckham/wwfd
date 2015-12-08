@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Wwfd.Core.Agents;
 using Wwfd.Core.Dto;
+using Wwfd.Core.Framework;
 
 namespace Wwfd.Api.Controllers
 {
@@ -26,10 +27,10 @@ namespace Wwfd.Api.Controllers
 		/// <param name="id">The founderId.</param>
 		/// <returns></returns>
 		[Route("founder/{id:int}")]
-		public IEnumerable<QuoteDto> GetByFounderId(int id)
+		public PaginatedResultSet<QuoteDto> GetByFounderId(int id, int page)
 		{
 			using (var agent = new QuoteAgent())
-				return agent.GetByFounderId(id);
+				return agent.GetByFounderId(id, new PaginatedQuery { CurrentPage = page});
 		}
 
 		/// <summary>

@@ -78,11 +78,11 @@
     <Compile Include="Dto\QuoteDto.cs" />
     <Compile Include="Dto\QuoteReferenceDto.cs" />
     <Compile Include="Exceptions\InvalidTokenExceptionException.cs" />
-    <Compile Include="Framework\PaginatedQuery.cs" />
-    <Compile Include="Framework\PaginatedResultSet.cs" />
-    <Compile Include="Framework\PaginatedSortableQuery.cs" />
-    <Compile Include="Framework\PaginatedSortableResultSet.cs" />
-    <Compile Include="Framework\SortDirection.cs" />
+    <Compile Include="Pagination\PaginatedQuery.cs" />
+    <Compile Include="Pagination\PaginatedResultSet.cs" />
+    <Compile Include="Pagination\PaginatedSortableQuery.cs" />
+    <Compile Include="Pagination\PaginatedSortableResultSet.cs" />
+    <Compile Include="Pagination\SortDirection.cs" />
     <Compile Include="Exceptions\EntityAlreadyExistsException.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Exceptions\TransactionAlreadyInProcessException.cs" />

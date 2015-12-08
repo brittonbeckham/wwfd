@@ -105,7 +105,9 @@
     <Content Include="Images\founders\thumbs\Thomas-Paine_thumb.jpg" />
     <Content Include="Images\founders\thumbs\Washington-Irving_thumb.jpg" />
     <Content Include="Images\founders\thumbs\William-Penn_thumb.jpg" />
-    <Content Include="js\app.js" />
+    <Content Include="js\app_contribute.js" />
+    <Content Include="js\app_main.js" />
+    <Content Include="js\dataService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\npm.js" />
@@ -910,11 +912,12 @@
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
-    <Content Include="Views\founder.html" />
-    <Content Include="Views\founders.html" />
-    <Content Include="Views\quote.html" />
-    <Content Include="Views\results.html" />
-    <Content Include="Views\terms.html" />
+    <Content Include="contribute.htm" />
+    <Content Include="Views\founder.htm" />
+    <Content Include="Views\founders.htm" />
+    <Content Include="Views\quote.htm" />
+    <Content Include="Views\results.htm" />
+    <Content Include="Views\terms.htm" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
   </ItemGroup>

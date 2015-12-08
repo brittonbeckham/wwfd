@@ -9,3 +9,5 @@ INSERT [dbo].[Document] ([DocumentId], [DocumentTypeId], [DocumentName], [Docume
 		<p>As a leader of the new Federalist Party, Jay was the Governor of New York State (1795–1801), where he became the state''s leading opponent of slavery. His first two attempts to end slavery in New York in 1777 and 1785 failed, but a third in 1799 succeeded. The 1799 Act, a gradual emancipation he signed into law, eventually gave all slaves in New York their freedom before his death in 1829.</p>')
 
 SET IDENTITY_INSERT [dbo].[Document] OFF
+
+INSERT INTO [dbo].[FounderDocument] VALUES (4,1)

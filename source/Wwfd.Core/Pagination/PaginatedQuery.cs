@@ -12,11 +12,11 @@ namespace Wwfd.Core.Framework
 		public PaginatedQuery()
 		{
 			//set defaults
-			RowsPerPage = DEFAULT_ROWS_PER_PAGE;
+			ResultsPerPage = DEFAULT_ROWS_PER_PAGE;
 			CurrentPage = DEFAULT_INITIAL_PAGE;
 		}
 
-		public int RowsPerPage { get; set; }
+		public int ResultsPerPage { get; set; }
 
 		/// <summary>
 		///     The one-based (1) index of the result pages to retrieve. Setting this property to a number less than one will
@@ -36,7 +36,7 @@ namespace Wwfd.Core.Framework
 
 		public int CalcNumberOfRecordsToSkip()
 		{
-			return RowsPerPage*(CurrentPage - 1); //converts to zero-based index
+			return ResultsPerPage*(CurrentPage - 1); //converts to zero-based index
 		}
 	}
 }

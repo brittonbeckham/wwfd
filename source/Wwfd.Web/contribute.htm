@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="contributeApp">
+<head>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <link href="Content/app.css" rel="stylesheet" />
+
+    <title>Wisdom of the Founders</title>
+</head>
+<body ng-controller="appController as ctrl">
+
+    <div id="site-wrapper" class="container">
+        <header>
+            <div class="jumbotron">
+                <h1>Wisdom of the Founders</h1>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" class="form-control input-lg" placeholder="Search 1000s of quotes" ng-model="quoteSearchText" ng-keydown="performSearch($event)" ng-change="searchAutoComplete()" />
+                    </div>
+                </div>
+
+            </div>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Home</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li ng-class="{'active' : (location.path() == '/founders')}"><a href="#/founders">Founders</a></li>
+                            <li ng-class="{'active' : (location.path() == '/documents')}"><a href="#/documents">Documents</a></li>
+                            <li ng-class="{'active' : (location.path() == '/timeline')}"><a href="#/timeline">Timeline</a></li>
+                            <li ng-class="{'active' : (location.path() == '/dailyquote')}"><a href="#/dailyquote">Daily Quote</a></li>
+                            <li ng-class="{'active' : (location.path() == '/about')}"><a href="#/about">About</a></li>
+                            <li ng-class="{'active' : (location.path() == '/contribute')}"><a href="#/contribute">Contribute</a></li>
+                        </ul>
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+    </div>
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/jquery-2.1.3.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+
+    <script src="Scripts/app_contribute.js"></script>
+    <script src="Scripts/dataService.js"></script>
+
+</body>
+</html>
