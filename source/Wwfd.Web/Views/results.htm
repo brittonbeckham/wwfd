@@ -7,49 +7,82 @@
 			<span class="toggle-switch fa" ng-class="{'fa-toggle-off': !highlightsOn, 'fa-toggle-on': highlightsOn}"></span>
 		</div>
 
-		<span ng-show="searchString">Your search for <b>{{::searchString}}</b> returned {{::quotes.length }} results.</span>
-		<span ng-show="keyword">Showing quotes related to <b>{{::keyword}}</b>; returned {{::quotes.length }} results.</span>
+		<span ng-show="searchString">Your search for <b>{{::searchString}}</b> returned {{::resultSet.TotalResults }} results.</span>
+		<span ng-show="keyword">Showing quotes related to <b>{{::keyword}}</b>; returned {{::resultSet.TotalResults }} results.</span>
 	</p>
 	<hr class="heavy" />
 
-	<div class="results" ng-repeat="quote in quotes">
-		<div class="media">
-			<div class="media-left">
-				<a href="#/founder/{{::quote.Founder.FounderId}}">
-					<img class="founder-thumbnail" ng-src="images/founders/thumbs/{{::quote.Founder.FullName.replace(' ', '-')}}_thumb.jpg" alt="" 
-						 data-toggle="tooltip" data-placement="top" title="See all quotes from {{::quote.Founder.FullName}}" />
-				</a>
-			</div>
-			<div class="media-body">
-				<div class="quote-container">
-					<div class="quote">
-						<a href="#/quote/{{::quote.QuoteId}}" class="quote-text">
-							<div>
-								<span class="fa fa-quote-left"></span><span ng-bind-html="quote.QuoteText" class="quote-text"></span><span class="fa fa-quote-right"></span>
-							</div>
-						</a>
-						<div class="quote-founder text-left">
-							—{{::quote.Founder.FullName}}
-						</div>
+    <nav class="text-center" ng-show="resultSet.TotalResults > 12">
+        <ul class="pagination">
+            <li ng-class="{'disabled': resultSet.CurrentPage == 1}">
+                <a href="#{{location.path()}}?page={{resultSet.CurrentPage-1}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li ng-repeat="i in getPagesNumber(number) track by $index" ng-class="{'active': resultSet.CurrentPage == ($index +1)}"><a href="#{{location.path()}}?page={{$index+1}}">{{$index+1}}</a></li>
+            <li ng-class="{'disabled': resultSet.CurrentPage == resultSet.TotalPages}">
+                <a href="#/{{location.path()}}?page={{resultSet.CurrentPage+1}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="results" ng-repeat="quote in quotes">
+        <div class="media">
+            <div class="media-left">
+                <a href="#/founder/{{::quote.Founder.FounderId}}">
+                    <img class="founder-thumbnail" ng-src="images/founders/thumbs/{{::quote.Founder.FullName.replace(' ', '-')}}_thumb.jpg" alt=""
+                         data-toggle="tooltip" data-placement="top" title="See all quotes from {{::quote.Founder.FullName}}"/>
+                </a>
+            </div>
+            <div class="media-body">
+                <div class="quote-container">
+                    <div class="quote">
+                        <a href="#/quote/{{::quote.QuoteId}}" class="quote-text">
+                            <div>
+                                <span class="fa fa-quote-left"></span><span ng-bind-html="quote.QuoteText" class="quote-text"></span><span class="fa fa-quote-right"></span>
+                            </div>
+                        </a>
+                        <div class="quote-founder text-left">
+                            —{{::quote.Founder.FullName}}
+                        </div>
 
 
-						<div class="quote-tags">
-							<div ng-repeat="word in quote.Keywords" class="label label-info">
-								<a href="#/search/keyword/{{::word | lowercase }}">{{::word | lowercase }}</a>
-							</div>
-						</div>
+                        <div class="quote-tags">
+                            <div ng-repeat="word in quote.Keywords" class="label label-info">
+                                <a href="#/search/keyword/{{::word | lowercase }}">{{::word | lowercase }}</a>
+                            </div>
+                        </div>
 
-						<div class="quote-references">
-							source:
-							<span ng-repeat="ref in quote.References">
+                        <div class="quote-references">
+                            source:
+                            <span ng-repeat="ref in quote.References">
 								{{::ref.ReferenceInformation}}
 							</span>
-						</div>
-					</div>
-					<hr />
-				</div>
-			</div>
-		</div>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
+
+    <nav class="text-center" ng-show="resultSet.TotalResults > 12">
+        <ul class="pagination">
+            <li ng-class="{'disabled': resultSet.CurrentPage == 1}">
+                <a href="#{{location.path()}}?page={{resultSet.CurrentPage-1}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li ng-repeat="i in getPagesNumber(number) track by $index" ng-class="{'active': resultSet.CurrentPage == ($index +1)}"><a href="#{{location.path()}}?page={{$index+1}}">{{$index+1}}</a></li>
+            <li ng-class="{'disabled': resultSet.CurrentPage == resultSet.TotalPages}">
+                <a href="#/{{location.path()}}?page={{resultSet.CurrentPage+1}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
 </div>

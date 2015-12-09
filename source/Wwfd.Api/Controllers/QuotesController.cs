@@ -3,6 +3,7 @@ using System.Web.Http;
 using Wwfd.Core.Agents;
 using Wwfd.Core.Dto;
 using Wwfd.Core.Framework;
+using Wwfd.Core.Models;
 
 namespace Wwfd.Api.Controllers
 {
@@ -27,7 +28,7 @@ namespace Wwfd.Api.Controllers
 		/// <param name="id">The founderId.</param>
 		/// <returns></returns>
 		[Route("founder/{id:int}")]
-		public PaginatedResultSet<QuoteDto> GetByFounderId(int id, int page)
+		public PaginatedResultSet<QuoteDto> GetByFounderId(int id, int page = 1)
 		{
 			using (var agent = new QuoteAgent())
 				return agent.GetByFounderId(id, new PaginatedQuery { CurrentPage = page});
@@ -41,10 +42,10 @@ namespace Wwfd.Api.Controllers
 		[Route("search/text/{searchString}")]
 		[AcceptVerbs("GET")]
 
-		public IEnumerable<QuoteDto> SearchByText(string searchString)
+        public PaginatedResultSet<QuoteDto> SearchByText(string searchString, int page = 1)
 		{
 			using (var agent = new QuoteAgent())
-				return agent.Search(searchString, null);
+				return agent.Search(new QuoteSearchRequest { Text = searchString, CurrentPage = page});
 		}
 
 		/// <summary>
@@ -54,10 +55,10 @@ namespace Wwfd.Api.Controllers
 		/// <returns></returns>
 		[Route("search/keyword/{keywords}")]
 		[AcceptVerbs("GET")]
-		public IEnumerable<QuoteDto> SearchByKeyword(string keywords)
+        public PaginatedResultSet<QuoteDto> SearchByKeyword(string keywords, int page = 1)
 		{
 			using (var agent = new QuoteAgent())
-				return agent.Search(null, keywords);
+                return agent.Search(new QuoteSearchRequest { Keyword = keywords, CurrentPage = page });
 		}
 
 		/// <summary>
@@ -67,10 +68,10 @@ namespace Wwfd.Api.Controllers
 		/// <returns></returns>
 		[Route("search/all/{searchString}")]
 		[AcceptVerbs("GET")]
-		public IEnumerable<QuoteDto> SearchAll(string searchString)
+        public PaginatedResultSet<QuoteDto> SearchAll(string searchString, int page = 1)
 		{
 			using (var agent = new QuoteAgent())
-				return agent.Search(searchString, searchString);
+                return agent.Search(new QuoteSearchRequest { Keyword = searchString, Text = searchString, CurrentPage = page });
 		}
 	}
 }

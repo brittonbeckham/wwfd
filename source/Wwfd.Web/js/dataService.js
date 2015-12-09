@@ -45,11 +45,11 @@
         getQuoteById: function (quoteId, callback) {
             get('quote/' + quoteId, callback);
         },
-        searchQuotesByText: function (text, callback) {
-            get('quote/search/text/' + text, callback);
+        searchQuotesByText: function (text, page, callback) {
+            get('quote/search/text/' + text + '?page='.concat(page), callback);
         },
-        searchQuotesByKeyword: function (keyword, callback) {
-            get('quote/search/keyword/' + keyword, callback);
+        searchQuotesByKeyword: function (keyword, page, callback) {
+            get('quote/search/keyword/' + keyword + '?page='.concat(page), callback);
         },
 
 

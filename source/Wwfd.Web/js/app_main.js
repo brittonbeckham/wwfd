@@ -162,17 +162,23 @@ app.controller('foundersController', ['dataService', '$scope', '$routeParams', '
     return {};
 }]);
 
-app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$compile', '$sce', '$timeout', function (wwfdData, $scope, $routeParams, $compile, $sce, $timeout) {
+app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$compile', '$sce', '$timeout', '$location', function (wwfdData, $scope, $routeParams, $compile, $sce, $timeout, $location) {
 
     init();
 
     function init() {
+        $scope.location = $location;
+
+        var page = 1;
+        if ($routeParams.page)
+            page = $routeParams.page;
+        
         if ($routeParams.searchString != null) {
-            wwfdData.searchQuotesByText($routeParams.searchString, loadQuotes);
+            wwfdData.searchQuotesByText($routeParams.searchString, page, loadQuotes);
             $scope.searchString = unescape($routeParams.searchString);
         }
         if ($routeParams.keyword != null) {
-            wwfdData.searchQuotesByKeyword($routeParams.keyword, loadQuotes);
+            wwfdData.searchQuotesByKeyword($routeParams.keyword, page, loadQuotes);
             $scope.keyword = $routeParams.keyword;
         }
 
@@ -189,7 +195,8 @@ app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$
     }
 
     function loadQuotes(data) {
-        $scope.quotes = wwfdData.seperateKeywords(data);
+        $scope.quotes = wwfdData.seperateKeywords(data.Results);
+        $scope.resultSet = data;
 
         //loop through quotes
         for (var i = 0; i < $scope.quotes.length; i++) {
@@ -213,6 +220,9 @@ app.controller('resultsController', ['dataService', '$scope', '$routeParams', '$
 
     }
 
+    $scope.getPagesNumber = function (num) {
+        return new Array($scope.resultSet.TotalPages);
+    }
 
     return {};
 }]);

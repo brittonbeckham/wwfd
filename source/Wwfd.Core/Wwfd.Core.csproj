@@ -78,6 +78,7 @@
     <Compile Include="Dto\QuoteDto.cs" />
     <Compile Include="Dto\QuoteReferenceDto.cs" />
     <Compile Include="Exceptions\InvalidTokenExceptionException.cs" />
+    <Compile Include="Models\QuoteSearchRequest.cs" />
     <Compile Include="Pagination\PaginatedQuery.cs" />
     <Compile Include="Pagination\PaginatedResultSet.cs" />
     <Compile Include="Pagination\PaginatedSortableQuery.cs" />
