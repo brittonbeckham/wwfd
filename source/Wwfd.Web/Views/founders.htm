@@ -3,8 +3,7 @@
 		The American Founders
 	</h2>
 	<p>
-		Below is a table of the American Founders, framers and influencers who partisipated establishment of
-		the United States of America.
+		Below is a table of the American Founders, framers and influencers who helped establish the United States of America.
 	</p>
 
 	<table class="table table-striped table-hover">
@@ -19,7 +18,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-click="go('/founder/' + founder.FounderId )" ng-repeat=" founder in founders" class="founder-row">
+			<tr ng-click="go('/founder/' + founder.FounderId )" ng-repeat="founder in founders" class="founder-row">
 				<td>{{:: founder.FirstName}}</td>
 				<td>{{:: founder.LastName}}</td>
 				<td>
@@ -27,8 +26,8 @@
 						{{:: founder.QuoteCount}}
 					</span>
 				</td>
-				<td>{{:: founder.DateBorn | date : 'MMM dd, yyyy' }}</td>
-				<td>{{:: founder.DateDied | date : 'MMM dd, yyyy' }}</td>
+				<td>{{:: (founder.DateBorn | date : 'MMM dd, yyyy') || founder.DateBornAprox}}</td>
+				<td>{{:: (founder.DateDied | date : 'MMM dd, yyyy') || founder.DateDiedAprox }}</td>
 			</tr>
 		</tbody>
 	</table>

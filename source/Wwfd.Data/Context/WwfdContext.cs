@@ -9,7 +9,7 @@ using Wwfd.Data.Schemas.dbo;
 
 namespace Wwfd.Data.Context
 {
-	public class WwfdContext : DbContext
+	public class WwfdContext :  DbContext
 	{
 		public WwfdContext() : base (ConfigurationManager.ConnectionStrings["Wwfd"].ConnectionString)
 		{
@@ -73,11 +73,13 @@ namespace Wwfd.Data.Context
 
 		private static void SetupExtendedOptions(WwfdContext context)
 		{
-			//full text searching
+			context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, GetResourceSqlScript("Wwfd.Data.Scripts.SetupCalulatedColumns.sql"));
+			
+            //full text searching
 			context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, GetResourceSqlScript("Wwfd.Data.Scripts.SetupFullText.sql"));
 
 			//triggers
-			context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, GetResourceSqlScript("Wwfd.Data.Scripts.SetupTriggers.sql"));
+			//context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, GetResourceSqlScript("Wwfd.Data.Scripts.SetupTriggers.sql"));
 
 			//disable lazyloading (should be default)
 			context.Configuration.LazyLoadingEnabled = false;

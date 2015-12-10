@@ -75,7 +75,9 @@ namespace Wwfd.Core.Agents
 						@t.f.FirstName,
 						@t.f.LastName,
 						@t.f.DateBorn,
+                        @t.f.DateBornAprox,
 						@t.f.DateDied,
+                        @t.f.DateDiedAprox,
 					}, @t => @t.q)
 					.OrderBy(r => r.Key.FullName)
 					.Select(grp1 => new FounderWithQuoteCountExtendedDto {
@@ -83,6 +85,8 @@ namespace Wwfd.Core.Agents
 						LastName = grp1.Key.LastName,
 						DateBorn = grp1.Key.DateBorn,
 						DateDied = grp1.Key.DateDied,
+                        DateBornAprox = grp1.Key.DateBornAprox,
+                        DateDiedAprox = grp1.Key.DateDiedAprox,
 						FounderId = grp1.Key.FounderId,
 						QuoteCount = grp1.Count()
 					});

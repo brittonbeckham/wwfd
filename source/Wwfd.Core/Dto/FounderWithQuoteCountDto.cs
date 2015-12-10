@@ -17,6 +17,8 @@ namespace Wwfd.Core.Dto
 		public string MiddleName { get; set; }
 		public DateTime? DateBorn { get; set; }
 		public DateTime? DateDied { get; set; }
+		public string DateBornAprox { get; set; }
+        public string DateDiedAprox { get; set; }
 		public int QuoteCount { get; set; }
 		public FounderRoleDto Roles { get; set; }
 	}

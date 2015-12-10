@@ -12,10 +12,10 @@ namespace Wwfd.Core.Dto
 		public string LastName { get; set; }
 		public string Suffix { get; set; }
 		public string Gender { get; set; }
-		public DateTime DateBorn { get; set; }
-		public DateTime DateDied { get; set; }
-		public string BornAprox { get; set; }
-        public string DiedAprox { get; set; }
+		public DateTime? DateBorn { get; set; }
+		public DateTime? DateDied { get; set; }
+		public string DateBornAprox { get; set; }
+        public string DateDiedAprox { get; set; }
 		public string FullName { get; set; }
 		public List<FounderRoleDto> Roles { get; set; }
 	}

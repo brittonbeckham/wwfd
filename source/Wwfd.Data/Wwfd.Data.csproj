@@ -102,9 +102,6 @@
     <EmbeddedResource Include="Scripts\SeedQuotes.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\SetupTriggers.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Scripts\SeedQuoteHistories.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\SeedDocuments.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\SetupCalulatedColumns.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

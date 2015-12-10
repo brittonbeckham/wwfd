@@ -37,7 +37,8 @@ namespace Wwfd.Data.Schemas.dbo
         [Column(TypeName = "Date")]
         public DateTime? DateDied { get; set; }
 
-        public string FullName { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public string FullName { get; private set; }
 
         public string DateBornAprox { get; set; }
 
@@ -46,6 +47,7 @@ namespace Wwfd.Data.Schemas.dbo
         public virtual ICollection<Quote> Quotes { get; set; }
 
         public virtual ICollection<FounderRoleType> FounderRoles { get; set; }
+       
         public virtual ICollection<Document> Documents { get; set; }
     }
 }

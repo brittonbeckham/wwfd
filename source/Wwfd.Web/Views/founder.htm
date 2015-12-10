@@ -6,7 +6,7 @@
         {{::founder.FullName}}
     </h1>
     <h4>
-        {{::founder.DateBorn | date : 'MMM yyyy'}} - {{::founder.DateDied | date : 'MMM yyyy'}}
+        {{:: (founder.DateBorn | date : 'MMM dd, yyyy') || founder.DateBornAprox}} - {{:: (founder.DateDied | date : 'MMM dd, yyyy') || founder.DateDiedAprox }}
     </h4>
 
     <div ng-repeat="role in founder.Roles" class="label label-default">

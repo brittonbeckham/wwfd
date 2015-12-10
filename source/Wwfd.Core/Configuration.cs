@@ -26,7 +26,9 @@ namespace Wwfd.Core
 
 			Mapper.CreateMap<FounderRoleType, FounderRoleDto>();
 
-			Mapper.CreateMap<Founder, FounderDto>();
+		    Mapper.CreateMap<Founder, FounderDto>();
+
+
 			Mapper.CreateMap<QuoteReference, QuoteReferenceDto>();
 
 			Mapper.CreateMap<Quote, QuoteDto>()
