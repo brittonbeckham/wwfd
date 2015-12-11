@@ -3,7 +3,9 @@ using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using Wwfd.Core.Dto;
+using Wwfd.Data.Enums;
 using Wwfd.Data.Schemas.dbo;
+using FounderRole = Wwfd.Data.Schemas.dbo.FounderRole;
 
 namespace Wwfd.Core.Agents
 {
@@ -15,7 +17,7 @@ namespace Wwfd.Core.Agents
 
 			//attach the roles
 			foreach (var role in roles)
-				entity.FounderRoles.Add(MapToEntity<FounderRoleDto, FounderRoleType>(role));
+				entity.FounderRoles.Add(MapToEntity<FounderRoleDto, FounderRole>(role));
 
 			CurrentContext.Founders.Add(entity);
 			CurrentContext.SaveChanges();

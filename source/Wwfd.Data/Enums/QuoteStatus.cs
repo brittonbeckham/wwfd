@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Wwfd.Data.Enums
 {
-	public enum QuoteStatusType
+	public enum QuoteStatus
 	{
 		Unconfirmed = 1,
 		Confirmed = 2,

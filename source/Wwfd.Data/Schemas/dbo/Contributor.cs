@@ -29,6 +29,6 @@ namespace Wwfd.Data.Schemas.dbo
 		
 		public bool IsActive { get; set; }
 		
-		public virtual ICollection<ContributorRoleType> ContributorRoles { get; set; }
+		public virtual ICollection<ContributorRole> ContributorRoles { get; set; }
 	}
 }

@@ -20,6 +20,6 @@ namespace Wwfd.Core.Dto
 		
 		public bool IsActive { get; set; }
 		
-		public virtual ICollection<ContributorRoleType> ContributorRoles { get; set; }
+		public virtual ICollection<ContributorRole> ContributorRoles { get; set; }
 	}
 }

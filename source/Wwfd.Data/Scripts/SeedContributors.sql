@@ -6,9 +6,9 @@ INSERT [dbo].[Contributor] ([ContributorID], [FirstName], [LastName], [Email], [
 INSERT [dbo].[Contributor] ([ContributorID], [FirstName], [LastName], [Email], [PasswordHash], [DateCreated], [IsActive]) VALUES (N'4d83d388-9873-479e-9c59-cee7d32fc87f', N'Matt', N'Bryson', N'mattjbryson@gmail.com', N'BearLake22', GETDATE(), 0)
 
 --set all original contibutor roles
-INSERT INTO ContributorRole
+INSERT INTO ContributorRoles
 SELECT ContributorId, 1 FROM Contributor
 
 --default software creator to admin
-INSERT INTO ContributorRole
+INSERT INTO ContributorRoles
 VALUES ('8EBD9A3C-3993-4F92-993B-261E61E040CF', 3)

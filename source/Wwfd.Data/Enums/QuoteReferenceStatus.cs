@@ -1,6 +1,6 @@
 namespace Wwfd.Data.Enums
 {
-	public enum QuoteReferenceStatusType
+	public enum QuoteReferenceStatus
 	{
 		Unverified = 1,
 		Verified = 2

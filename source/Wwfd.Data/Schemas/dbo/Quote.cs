@@ -10,7 +10,7 @@ namespace Wwfd.Data.Schemas.dbo
 		
 		public int FounderId { get; set; }
 
-		public int QuoteStatusTypeId { get; set; }
+		public int QuoteStatusId { get; set; }
 
 		[Required]
 		public string QuoteText { get; set; }
@@ -26,7 +26,7 @@ namespace Wwfd.Data.Schemas.dbo
 				
 		public virtual Founder Founder { get; set; }
 
-		public virtual QuoteStatusType QuoteStatusType { get; set; }
+		public virtual QuoteStatus QuoteStatus { get; set; }
 
 		public virtual ICollection<QuoteHistory> QuoteHistories { get; set; } 
 

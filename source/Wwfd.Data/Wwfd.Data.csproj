@@ -58,31 +58,31 @@
     <Compile Include="Context\LookupTableSeeder.cs" />
     <Compile Include="Context\WwfdContext.cs" />
     <Compile Include="Context\WwfdSchemas.cs" />
-    <Compile Include="Enums\DailyQuoteProcessesStatusType.cs" />
+    <Compile Include="Enums\DailyQuoteProcessStatus.cs" />
     <Compile Include="Enums\DocumentType.cs" />
-    <Compile Include="Schemas\dbo\ContributorRoleType.cs" />
+    <Compile Include="Schemas\dbo\ContributorRole.cs" />
     <Compile Include="Schemas\dbo\Document.cs" />
     <Compile Include="Schemas\dbo\DocumentReference.cs" />
     <Compile Include="Schemas\dbo\DocumentType.cs" />
-    <Compile Include="Schemas\dbo\FounderRoleType.cs" />
+    <Compile Include="Schemas\dbo\FounderRole.cs" />
     <Compile Include="Schemas\dbo\PerformedSearch.cs" />
     <Compile Include="Schemas\dbo\QuoteHistoryType.cs" />
     <Compile Include="Schemas\dbo\QuoteHistory.cs" />
     <Compile Include="Schemas\dbo\QuoteReference.cs" />
-    <Compile Include="Schemas\dbo\QuoteReferenceStatusType.cs" />
-    <Compile Include="Schemas\dbo\QuoteStatusType.cs" />
-    <Compile Include="Enums\ContributorRoleType.cs" />
+    <Compile Include="Schemas\dbo\QuoteReferenceStatus.cs" />
+    <Compile Include="Schemas\dbo\QuoteStatus.cs" />
+    <Compile Include="Enums\ContributorRole.cs" />
     <Compile Include="Schemas\dbo\Contributor.cs" />
     <Compile Include="Schemas\dbo\Founder.cs" />
     <Compile Include="Schemas\dbo\Quote.cs" />
-    <Compile Include="Enums\FounderRoleType.cs" />
+    <Compile Include="Enums\FounderRole.cs" />
     <Compile Include="Enums\QuoteHistoryType.cs" />
-    <Compile Include="Enums\QuoteReferenceStatusType.cs" />
-    <Compile Include="Enums\QuoteStatusType.cs" />
+    <Compile Include="Enums\QuoteReferenceStatus.cs" />
+    <Compile Include="Enums\QuoteStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schemas\DailyQuote\DailyQuote.cs" />
     <Compile Include="Schemas\DailyQuote\DailyQuoteProcess.cs" />
-    <Compile Include="Schemas\DailyQuote\DailyQuoteProcessStatusType.cs" />
+    <Compile Include="Schemas\DailyQuote\DailyQuoteProcessStatus.cs" />
     <Compile Include="Schemas\DailyQuote\DailyQuoteSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\SetupCalulatedColumns.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\SetupFounderRoleDescriptions.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

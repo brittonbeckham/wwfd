@@ -2,7 +2,7 @@
 
 namespace Wwfd.Data.Schemas.DailyQuote
 {
-	public class DailyQuoteProcessStatusType
+	public class DailyQuoteProcessStatus
 	{
 		public int Id { get; set; }
 

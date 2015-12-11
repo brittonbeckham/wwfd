@@ -2,7 +2,7 @@
 
 namespace Wwfd.Data.Enums
 {
-	public enum DailyQuoteProcessStatusType
+	public enum DailyQuoteProcessStatus
 	{
 		Processed = 1,
 

@@ -32,7 +32,7 @@ namespace Wwfd.Data.Schemas.dbo
 
 		//public virtual Quote Quote { get; set; }
 
-		public virtual QuoteReferenceStatusType QuoteReferenceStatusType { get; set; }
+		public virtual QuoteReferenceStatus QuoteReferenceStatus { get; set; }
 
 		public virtual Contributor Contributor { get; set; }
 		

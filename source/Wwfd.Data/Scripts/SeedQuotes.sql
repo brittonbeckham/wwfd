@@ -1,6 +1,6 @@
 ﻿SET IDENTITY_INSERT [Quote] ON 
 
-INSERT [Quote] ([QuoteID], [QuoteStatusTypeId], [FounderID], [QuoteText], [Keywords], [DateAdded]) 
+INSERT [Quote] ([QuoteID], [QuoteStatusId], [FounderID], [QuoteText], [Keywords], [DateAdded]) 
 VALUES 
 
 	(1, 1, 2, N'Every government degenerates when trusted to the rulers of the people alone. The people themselves, therefore, are its only safe depositories. And to render even them safe, their minds must be improved to a certain degree.', N'liberty, trust, government, education', CAST(0x00009CB5012C3C3C AS DateTime)),

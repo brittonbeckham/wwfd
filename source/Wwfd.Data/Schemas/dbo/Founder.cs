@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Wwfd.Data.Enums;
 
 namespace Wwfd.Data.Schemas.dbo
 {
@@ -46,7 +47,7 @@ namespace Wwfd.Data.Schemas.dbo
 
         public virtual ICollection<Quote> Quotes { get; set; }
 
-        public virtual ICollection<FounderRoleType> FounderRoles { get; set; }
+        public virtual ICollection<FounderRole> FounderRoles { get; set; }
        
         public virtual ICollection<Document> Documents { get; set; }
     }

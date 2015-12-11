@@ -4,8 +4,16 @@ using System.Data.Entity.Infrastructure.Interception;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.IO;
 using System.Reflection;
+using Wwfd.Data.Enums;
 using Wwfd.Data.Schemas.DailyQuote;
 using Wwfd.Data.Schemas.dbo;
+using ContributorRole = Wwfd.Data.Schemas.dbo.ContributorRole;
+using DailyQuoteProcessStatus = Wwfd.Data.Schemas.DailyQuote.DailyQuoteProcessStatus;
+using DocumentType = Wwfd.Data.Schemas.dbo.DocumentType;
+using FounderRole = Wwfd.Data.Schemas.dbo.FounderRole;
+using QuoteHistoryType = Wwfd.Data.Schemas.dbo.QuoteHistoryType;
+using QuoteReferenceStatus = Wwfd.Data.Schemas.dbo.QuoteReferenceStatus;
+using QuoteStatus = Wwfd.Data.Schemas.dbo.QuoteStatus;
 
 namespace Wwfd.Data.Context
 {
@@ -25,14 +33,14 @@ namespace Wwfd.Data.Context
 
 		//dbo
 		public DbSet<Founder> Founders { get; set; }
-		public DbSet<FounderRoleType> FounderRoleTypes { get; set; }
+		public DbSet<FounderRole> FounderRoles { get; set; }
 		public DbSet<Quote> Quotes { get; set; }
 		public DbSet<QuoteHistory> QuoteHistories { get; set; }
 		public DbSet<QuoteHistoryType> QuoteHistoryTypes { get; set; }
 		public DbSet<QuoteReference> QuoteReferences { get; set; }
-		public DbSet<QuoteReferenceStatusType> QuoteReferenceStatusTypes { get; set; }
-		public DbSet<QuoteStatusType> QuoteStatus { get; set; }
-		public DbSet<ContributorRoleType> ContributorRoleTypes { get; set; }
+		public DbSet<QuoteReferenceStatus> QuoteReferenceStatusTypes { get; set; }
+		public DbSet<QuoteStatus> QuoteStatus { get; set; }
+		public DbSet<ContributorRole> ContributorRoles { get; set; }
 		public DbSet<Contributor> Contributors { get; set; }
 		public DbSet<Document> Documents { get; set; }
 		public DbSet<DocumentType> DocumentTypes { get; set; }
@@ -43,7 +51,7 @@ namespace Wwfd.Data.Context
 		public DbSet<DailyQuoteSubscriber> DailyQuoteSubscribers { get; set; }
 		public DbSet<DailyQuote> DailyQuotes { get; set; }
 		public DbSet<DailyQuoteProcess> DailyQuoteProcesses { get; set; }
-		public DbSet<DailyQuoteProcessStatusType> DailyQuoteProcessesStatusTypes { get; set; }
+		public DbSet<DailyQuoteProcessStatus> DailyQuoteProcessesStatuses { get; set; }
 
 		public static void Initialize(bool populateSeedData = true)
 		{
@@ -55,13 +63,13 @@ namespace Wwfd.Data.Context
 			context.Database.Initialize(true);
 
 			//seed the lookup tables
-			context.CreateLookupForEnum<Enums.FounderRoleType>();
+			context.CreateLookupForEnum<Enums.FounderRole>();
 			context.CreateLookupForEnum<Enums.DocumentType>();
-			context.CreateLookupForEnum<Enums.ContributorRoleType>();
+			context.CreateLookupForEnum<Enums.ContributorRole>();
 			context.CreateLookupForEnum<Enums.QuoteHistoryType>();
-			context.CreateLookupForEnum<Enums.QuoteStatusType>();
-			context.CreateLookupForEnum<Enums.QuoteReferenceStatusType>();
-			context.CreateLookupForEnum<Enums.DailyQuoteProcessStatusType>();
+			context.CreateLookupForEnum<Enums.QuoteStatus>();
+			context.CreateLookupForEnum<Enums.QuoteReferenceStatus>();
+			context.CreateLookupForEnum<Enums.DailyQuoteProcessStatus>();
 
 			//setup advanced stuff
 			SetupExtendedOptions(context);
@@ -130,9 +138,9 @@ namespace Wwfd.Data.Context
 				.WithMany(x => x.Contributors)
 				.Map(x =>
 				{
-					x.ToTable("ContributorRole");
+					x.ToTable("ContributorRoles");
 					x.MapLeftKey("ContributorId");
-					x.MapRightKey("ContributorRoleTypeId");
+					x.MapRightKey("ContributorRoleId");
 				});
 
 			//create many-to-many relationship with founder roles
@@ -141,9 +149,9 @@ namespace Wwfd.Data.Context
 				.WithMany(x => x.Founders)
 				.Map(x =>
 				{
-					x.ToTable("FounderRole");
+					x.ToTable("FounderRoles");
 					x.MapLeftKey("FounderId");
-					x.MapRightKey("FounderRoleTypeId");
+					x.MapRightKey("FounderRoleId");
 				});
 
 			modelBuilder.Entity<Founder>()

@@ -19,6 +19,6 @@ namespace Wwfd.Data.Schemas.DailyQuote
 
 		public virtual DailyQuote DailyQuote { get; set; }
 
-		public virtual DailyQuoteProcessStatusType Status { get; set; }
+		public virtual DailyQuoteProcessStatus Status { get; set; }
 	}
 }

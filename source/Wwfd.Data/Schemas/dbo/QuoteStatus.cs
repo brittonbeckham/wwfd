@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Wwfd.Data.Schemas.dbo
 {
-	public class QuoteStatusType
+	public class QuoteStatus
 	{
 		public int Id { get; set; }
 		

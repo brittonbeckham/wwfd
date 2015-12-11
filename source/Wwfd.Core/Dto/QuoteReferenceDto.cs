@@ -21,7 +21,7 @@ namespace Wwfd.Core.Dto
 
 		public DateTime? DateVerified { get; set; }
 
-		public QuoteReferenceStatusType QuoteReferenceStatusType { get; set; }
+		public QuoteReferenceStatus QuoteReferenceStatus { get; set; }
 
 		public Guid ContributorId { get; set; }
 
